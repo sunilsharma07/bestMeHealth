@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-plus-square"></i>Test Report Listing
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Test Type</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let testReport of reportsData; let i = index">
+            <td>{{ testReport.testType | titlecase }}</td>
+            <td>{{ testReport.createdBy }}</td>
+            <td>{{ testReport.createdAt | date:"dd/MM/yy" }}</td>
+            <td>
+              <button *ngIf="testReport.testType == 'fit132'" class="btn btn-dark btn-pill" [routerLink]="['/reportManagement/fit132/details', testReport._id]"><i
+                  class="fa fa-eye"> View</i></button>
+              <button *ngIf="testReport.testType == 'micronutrients'" class="btn btn-dark btn-pill" [routerLink]="['/reportManagement/micronutrients/details', testReport._id]"><i
+                  class="fa fa-eye"> View</i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

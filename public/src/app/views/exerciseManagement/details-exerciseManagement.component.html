@@ -1,0 +1,83 @@
+<div class="card">
+  <form [formGroup]="detailsExerciseForm" class="form-validate mb-lg" role="form" name="detailsExerciseForm"
+    novalidate="">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Exercise Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Name" type="text" name="name" formControlName="name"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Category</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Category" type="text" name="category"
+                  formControlName="category" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-4">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Equipment</label>
+              <div class="col-sm-12">
+                <ul *ngIf="equipment.length">
+                  <li *ngFor="let eq of equipment">{{eq}}</li>
+                </ul>
+                <span *ngIf="equipment.length <= 0">Not available</span>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-4">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Secondary Muscle</label>
+              <div class="col-sm-12">
+                <ul *ngIf="muscleSecondary.length">
+                  <li *ngFor="let sm of muscleSecondary">{{sm}}</li>
+                </ul>
+                <span *ngIf="muscleSecondary.length <= 0">Not available</span>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-4">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Muscle</label>
+              <div class="col-sm-12">
+                <ul *ngIf="muscles.length">
+                  <li *ngFor="let m of muscles">{{m}}</li>
+                </ul>
+                <span *ngIf="muscles.length <= 0">Not available</span>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Description</label>
+              <div class="col-sm-12">
+                <table class="cusTblExercise">
+                  <tr>
+                    <td class="cusTblExercisetd" [innerHTML]="description">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/exerciseManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

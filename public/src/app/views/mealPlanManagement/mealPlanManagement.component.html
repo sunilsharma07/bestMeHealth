@@ -1,0 +1,497 @@
+<div class="card">
+  <form [formGroup]="mealPlanForm" class="form-validate mb-lg" role="form" name="mealPlanForm" novalidate="" (submit)="mealPlanFormSubmit()">
+    <div class="card-header">
+      <span><i class="fa fa-retweet"></i> Meal Plan For <b>` {{userName}} `</b></span>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <fieldset class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Start Date</label>
+            <div class="col-sm-12">
+              <input type="text" formControlName="startDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Datepicker"
+                class="form-control" bsDatepicker>
+              <div *ngIf="(submitted && mealPlanForm.controls.startDate.invalid) || mealPlanForm.controls.startDate.touched">
+                <div *ngIf="mealPlanForm.hasError('required','startDate')" class="err-msg">
+                  Please enter start date.
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="col-sm-12">
+            <tabset [justified]="true" #staticTabs>
+              <tab heading="Day 1" (select)="onTabSelect($event)">
+                <accordion [closeOthers]="true">
+                  <accordion-group heading="Breakfast" [isOpen]="true">
+                    <div class="col-sm-12">
+                      <div class="form-grp-wrap" formArrayName="breakFastFormsAttr" *ngFor="let breakFatFormContrl of breakFastFormsData.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                          <div class="row">
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Quantity</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{breakFatFormContrl}}" class="form-control" placeholder="Quantity"
+                                    formControlName="qty">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.qty.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','qty')"
+                                      class="err-msg">
+                                      Please enter quantity.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Measure</label>
+                                <div class="col-sm-12">
+                                  <input type="text" name="{{breakFatFormContrl}}" class="form-control" placeholder="Measure"
+                                    formControlName="measure">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.measure.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','measure')"
+                                      class="err-msg">
+                                      Please enter measure.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Protin</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{breakFatFormContrl}}" class="form-control" placeholder="Protin"
+                                    formControlName="protin">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.protin.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','protin')"
+                                      class="err-msg">
+                                      Please enter protin.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Fat</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{breakFatFormContrl}}" class="form-control" placeholder="Fat"
+                                    formControlName="fat">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.fat.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','fat')"
+                                      class="err-msg">
+                                      Please enter fat.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Carbs</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{breakFatFormContrl}}" class="form-control" placeholder="Carbs"
+                                    formControlName="carbs">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.carbs.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','carbs')"
+                                      class="err-msg">
+                                      Please enter carbs.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Calories</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{breakFatFormContrl}}" class="form-control" placeholder="Calories"
+                                    formControlName="calories">
+                                  <div *ngIf="((submitted || breakFastPartialSubmmit) && mealPlanForm && mealPlanForm.controls.breakFastFormsAttr.controls[i].controls.calories.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.breakFastFormsAttr.controls[i].hasError('required','calories')"
+                                      class="err-msg">
+                                      Please enter calories.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <label class="col-sm-12 control-label">&nbsp;</label>
+                              <div *ngIf="i > 0" class="rmvBtnCss">
+                                <button type="button" class="btn btn-danger btn-pill" (click)="removeFormFields(i, 'breakFastFormsAttr')">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                              </div>
+                              <div class="addBtnCss" *ngIf="i == (breakFastFormsData.controls.length -1)">
+                                <button class="btn btn-success btn-pill" type="button" (click)="addFormFields(i, 'breakFastFormsAttr')"><i
+                                    class="fa fa-plus"></i></button>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </accordion-group>
+                </accordion>
+                <accordion [closeOthers]="true">
+                  <accordion-group heading="Lunch">
+                    <div class="col-sm-12">
+                      <div class="form-grp-wrap" formArrayName="lunchFormsAttr" *ngFor="let lunchFormControl of lunchFormsData.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                          <div class="row">
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Quantity</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{lunchFormControl}}" class="form-control" placeholder="Quantity"
+                                    formControlName="qty">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.qty.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','qty')"
+                                      class="err-msg">
+                                      Please enter quantity.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Measure</label>
+                                <div class="col-sm-12">
+                                  <input type="text" name="{{lunchFormControl}}" class="form-control" placeholder="Measure"
+                                    formControlName="measure">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.measure.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','measure')"
+                                      class="err-msg">
+                                      Please enter measure.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Protin</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{lunchFormControl}}" class="form-control" placeholder="Protin"
+                                    formControlName="protin">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.protin.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','protin')"
+                                      class="err-msg">
+                                      Please enter protin.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Fat</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{lunchFormControl}}" class="form-control" placeholder="Fat"
+                                    formControlName="fat">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.fat.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','fat')"
+                                      class="err-msg">
+                                      Please enter fat.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Carbs</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{lunchFormControl}}" class="form-control" placeholder="Carbs"
+                                    formControlName="carbs">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.carbs.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','carbs')"
+                                      class="err-msg">
+                                      Please enter carbs.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Calories</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{lunchFormControl}}" class="form-control" placeholder="Calories"
+                                    formControlName="calories">
+                                  <div *ngIf="((submitted || lunchPartialSubmmit) && mealPlanForm && mealPlanForm.controls.lunchFormsAttr.controls[i].controls.calories.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.lunchFormsAttr.controls[i].hasError('required','calories')"
+                                      class="err-msg">
+                                      Please enter calories.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <label class="col-sm-12 control-label">&nbsp;</label>
+                              <div *ngIf="i > 0" class="rmvBtnCss">
+                                <button type="button" class="btn btn-danger btn-pill" (click)="removeFormFields(i, 'lunchFormsAttr')">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                              </div>
+                              <div class="addBtnCss" *ngIf="i == (lunchFormsData.controls.length -1)">
+                                <button class="btn btn-success btn-pill" type="button" (click)="addFormFields(i, 'lunchFormsAttr')"><i
+                                    class="fa fa-plus"></i></button>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </accordion-group>
+                </accordion>
+                <accordion [closeOthers]="true">
+                  <accordion-group heading="Dinner">
+                    <div class="col-sm-12">
+                      <div class="form-grp-wrap" formArrayName="dinnerFormsAttr" *ngFor="let dinnerFormControl of dinnerFormsData.controls; let i = index;">
+                        <ng-container [formGroupName]="i">
+                          <div class="row">
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Food Category</label>
+                                <div class="col-sm-12">
+                                  <ng-multiselect-dropdown [placeholder]="'Food Category'" [data]="allFoodCategory"
+                                    [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                                  </ng-multiselect-dropdown>
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.foodCategory.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','foodCategory')"
+                                      class="err-msg">
+                                      Please enter food category.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Quantity</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{dinnerFormControl}}" class="form-control" placeholder="Quantity"
+                                    formControlName="qty">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.qty.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','qty')"
+                                      class="err-msg">
+                                      Please enter quantity.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Measure</label>
+                                <div class="col-sm-12">
+                                  <input type="text" name="{{dinnerFormControl}}" class="form-control" placeholder="Measure"
+                                    formControlName="measure">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.measure.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','measure')"
+                                      class="err-msg">
+                                      Please enter measure.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Protin</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{dinnerFormControl}}" class="form-control" placeholder="Protin"
+                                    formControlName="protin">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.protin.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','protin')"
+                                      class="err-msg">
+                                      Please enter protin.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Fat</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{dinnerFormControl}}" class="form-control" placeholder="Fat"
+                                    formControlName="fat">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.fat.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','fat')"
+                                      class="err-msg">
+                                      Please enter fat.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Carbs</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{dinnerFormControl}}" class="form-control" placeholder="Carbs"
+                                    formControlName="carbs">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.carbs.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','carbs')"
+                                      class="err-msg">
+                                      Please enter carbs.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <div class="form-group custom-form-grp">
+                                <label class="col-sm-12 control-label">Calories</label>
+                                <div class="col-sm-12">
+                                  <input type="number" name="{{dinnerFormControl}}" class="form-control" placeholder="Calories"
+                                    formControlName="calories">
+                                  <div *ngIf="((submitted || dinnerPartialSubmmit) && mealPlanForm && mealPlanForm.controls.dinnerFormsAttr.controls[i].controls.calories.invalid)">
+                                    <div *ngIf="mealPlanForm.controls.dinnerFormsAttr.controls[i].hasError('required','calories')"
+                                      class="err-msg">
+                                      Please enter calories.
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </fieldset>
+                            <fieldset class="col-md-3">
+                              <label class="col-sm-12 control-label">&nbsp;</label>
+                              <div *ngIf="i > 0" class="rmvBtnCss">
+                                <button type="button" class="btn btn-danger btn-pill" (click)="removeFormFields(i, 'dinnerFormsAttr')">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                              </div>
+                              <div class="addBtnCss" *ngIf="i == (dinnerFormsData.controls.length -1)">
+                                <button class="btn btn-success btn-pill" type="button" (click)="addFormFields(i, 'dinnerFormsAttr')"><i
+                                    class="fa fa-plus"></i></button>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </accordion-group>
+                </accordion>
+              </tab>
+              <tab heading="Day 2" (select)="onTabSelect($event)">
+              </tab>
+              <tab heading="Day 3" (select)="onTabSelect($event)">
+              </tab>
+              <tab heading="Day 4" (select)="onTabSelect($event)">
+              </tab>
+              <tab heading="Day 5" (select)="onTabSelect($event)">
+              </tab>
+              <tab heading="Day 6" (select)="onTabSelect($event)">
+              </tab>
+              <tab heading="Day 7" (select)="onTabSelect($event)">
+              </tab>
+            </tabset>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button class="btn btn-pill btn-dark" type="submit">
+            <i class="fa fa-check"> Save</i>
+          </button>
+        </div>
+        <div class="cus-col-2 nopadding">
+          <button class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

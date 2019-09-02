@@ -1,0 +1,121 @@
+<div class="card">
+  <form [formGroup]="adminProfileForm" class="form-validate mb-lg" role="form" name="adminProfileForm" novalidate=""
+    (submit)="adminProfileFormSubmit()">
+    <div class="card-header" style="height: 59px;">
+      <span><i class="fa fa-user"></i> Profile</span>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">First Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="First Name" type="text" name="firstName" formControlName="firstName"
+                  class="form-control" readonly="true" />
+                <input *ngIf="action == 'edit'" placeholder="First Name" type="text" name="firstName" formControlName="firstName"
+                  class="form-control" minlength="2" maxlength="50" />
+                <div *ngIf="(action == 'edit' && submitted && adminProfileForm.controls.firstName.invalid) || adminProfileForm.controls.firstName.touched">
+                  <div *ngIf="adminProfileForm.hasError('required','firstName')" class="err-msg">
+                    Please enter your first name.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('required','firstName') && adminProfileForm.hasError('pattern','firstName')"
+                    class="err-msg">
+                    First name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('required','firstName') && !adminProfileForm.hasError('pattern','firstName') && adminProfileForm.hasError('minlength','firstName')"
+                    class="err-msg">
+                    First name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Last Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Last Name" type="text" name="lastName" formControlName="lastName"
+                  class="form-control" readonly="true" />
+                <input *ngIf="action == 'edit'" placeholder="Last Name" type="text" name="lastName" formControlName="lastName"
+                  class="form-control" minlength="2" maxlength="50" />
+                <div *ngIf="(action == 'edit' && submitted && adminProfileForm.controls.lastName.invalid) || adminProfileForm.controls.lastName.touched">
+                  <div *ngIf="adminProfileForm.hasError('required','lastName')" class="err-msg">
+                    Please enter your last name.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('required','lastName') && adminProfileForm.hasError('pattern','lastName')"
+                    class="err-msg">
+                    Last name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('pattern','lastName') && !adminProfileForm.hasError('required','lastName') && adminProfileForm.hasError('minlength','lastName')"
+                    class="err-msg">
+                    Last name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Email</label>
+              <div class="col-sm-12">
+                <input placeholder="Email" type="text" name="email" formControlName="email" class="form-control"
+                  readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Phone Number</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Phone Number" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" class="form-control" readonly="true" />
+                <input *ngIf="action == 'edit'" placeholder="Phone Number" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" class="form-control" maxlength="8" maxlength="15" />
+                <div *ngIf="(submitted && adminProfileForm.controls.phoneNumber.invalid) || adminProfileForm.controls.phoneNumber.touched">
+                  <div *ngIf="adminProfileForm.hasError('required','phoneNumber')" class="err-msg">
+                    Please enter your phone number.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('required','phoneNumber') && adminProfileForm.hasError('pattern','phoneNumber')"
+                    class="err-msg">
+                    Please enter valid phone number.
+                  </div>
+                  <div *ngIf="!adminProfileForm.hasError('pattern','phoneNumber') && !adminProfileForm.hasError('required','phoneNumber') && adminProfileForm.hasError('minlength','phoneNumber')"
+                    class="err-msg">
+                    Phone number should contain at least 8 digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" (click)="updateProfie()">
+            <i class="fa fa-edit"> Edit</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="width: 120%;">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'edit'" type="submit" class="btn btn-pill btn-dark">
+            <i class="fa fa-edit"> Update</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'edit'" type="button" class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+            <i class="fa fa-close"> Cancel</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

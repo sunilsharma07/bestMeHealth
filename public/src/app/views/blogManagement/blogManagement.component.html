@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-newspaper-o"></i> Blog Listing</span>
+    <button style="float: right;" [routerLink]="['/blogManagement/addBlog']" class="btn btn-pill btn-success"><i class="fa fa-plus"></i>
+      Add Blog</button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>View Count</th>
+            <th>Title</th>
+            <th>Details</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="blogs?.length != 0">
+          <tr *ngFor="let blog of blogs">
+            <td>{{ blog.viewsCount }}</td>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.details | slice:0:190 }} ...</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/blogManagement/blogDetails', blog._id]"><i class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <span *ngIf="blog.isActive == false">
+                <button (click)="changedBlogstatus(blog._id, 'active')" class="btn btn-success btn-pill"><i class="fa fa-check">
+                    Active</i></button>&nbsp;
+              </span>
+              <span *ngIf="blog.isActive == true">
+                <button (click)="changedBlogstatus(blog._id, 'inactive')" class="btn btn-warning btn-pill"><i class="fa fa-ban">
+                    In-Active</i></button>&nbsp;
+              </span>
+              <button (click)="deleteBlog(blog._id)" class="btn btn-danger btn-pill"><i class="fa fa-trash">
+                  Delete</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="blogs?.length == 0">
+          <tr>
+            <td colspan="4" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

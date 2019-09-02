@@ -1,0 +1,89 @@
+<div class="card">
+  <form [formGroup]="changedSlotsForm" class="form-validate mb-lg" role="form" name="changedSlotsForm" novalidate=""
+    (submit)="changedSlotsFormSubmit()">
+    <div class="card-header">
+      <span><i class="fa fa-clock-o"></i> Change Slots</span>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <fieldset>
+          <div class="col-sm-12">
+            <tabset [justified]="true" #staticTabs>
+              <tab heading="Monday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="monday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Tuesday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="tuesday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Wednesday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="wednesday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Thursday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="thursday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Friday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="friday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Saturday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="saturday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+              <tab heading="Sunday" (select)="onTabSelect($event)">
+                <div class="check-grp" *ngFor="let slot of slots; let i = index" formArrayName="sunday">
+                  <input class="custom-checkbox" id="{{day}}-{{i+1}}" type="checkbox" [formControlName]="i">
+                  <label for="{{day}}-{{i+1}}" class="checkmark">{{slot.time}}</label>
+                </div>
+              </tab>
+            </tabset>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <!-- <div *ngIf="isFirstTime && enableSaveBtn == false">
+          <button class="btn btn-pill btn-dark" type="button" (click)="saveAndContinue(false)">
+            <i class="fa fa-check"> Save & Continue</i>
+          </button>
+        </div> -->
+        <div *ngIf="isFirstTime && enableSaveBtn == false" class="col-sm-1">
+          <button class="btn btn-pill btn-dark" type="button" (click)="skipBtn()">
+            <i class="fa fa-ban"> Skip</i>
+          </button>
+        </div>
+        <div *ngIf="enableSaveBtn && isFirstTime" class="col-sm-1">
+          <button class="btn btn-pill btn-dark" type="submit">
+            <i class="fa fa-check"> Save</i>
+          </button>
+        </div>
+        <div *ngIf="isFirstTime == false" class="cus-col-2">
+          <!--  (click)="updateSlots()" -->
+          <button class="btn btn-pill btn-dark"><i class="fa fa-edit"></i>
+            Update</button>
+        </div>
+        <div class="cus-col-2 nopadding">
+          <button class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

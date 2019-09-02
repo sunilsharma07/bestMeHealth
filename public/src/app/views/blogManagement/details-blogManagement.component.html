@@ -1,0 +1,98 @@
+<div class="card">
+  <form [formGroup]="detailsBlogForm" class="form-validate mb-lg" role="form" name="detailsBlogForm" novalidate=""
+    (submit)="updateBlogFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Blog Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Blog title" type="text" name="title" formControlName="title"
+                  class="form-control" readonly="true" />
+                <input *ngIf="action == 'edit'" placeholder="Title" type="text" name="title" formControlName="title"
+                  class="form-control" minlength="2" maxlength="50" />
+                <div *ngIf="(action == 'edit' && submitted && detailsBlogForm.controls.title.invalid) || detailsBlogForm.controls.title.touched">
+                  <div *ngIf="detailsBlogForm.hasError('required','title')" class="err-msg">
+                    Please enter title.
+                  </div>
+                  <div *ngIf="!detailsBlogForm.hasError('required','title') && detailsBlogForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Title field should be accept only characters.
+                  </div>
+                  <div *ngIf="!detailsBlogForm.hasError('pattern','title') && !detailsBlogForm.hasError('required','title') && detailsBlogForm.hasError('minlength','title')"
+                    class="err-msg">
+                    Title should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Details</label>
+              <div class="col-sm-12">
+                <ckeditor *ngIf="action == 'view'" [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }"
+                  formControlName="details" data="{{details}}" disabled="disabled"></ckeditor>
+                <ckeditor *ngIf="action == 'edit'" [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }"
+                  formControlName="details" data="{{details}}"></ckeditor>
+                <div *ngIf="(action == 'edit' && submitted && detailsBlogForm.controls.details.invalid) || detailsBlogForm.controls.details.touched">
+                  <div *ngIf="detailsBlogForm.hasError('required','details')" class="err-msg">
+                    Please enter blog details.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Media</label>
+              <div class="col-sm-12">
+                <img *ngIf="action == 'view'" src="{{media}}" class="customImg" name="media" readonly="true" />
+                <input *ngIf="action == 'edit'" type="file" (change)="onFileChange($event)" name="media"
+                  formControlName="media" class="form-control" />
+                <div *ngIf="(action == 'edit' && submitted && detailsBlogForm.controls.media.invalid) || detailsBlogForm.controls.media.touched">
+                  <div *ngIf="detailsBlogForm.hasError('required','media')" class="err-msg">
+                    Please upload blog media.
+                  </div>
+                </div>
+                <div *ngIf="isMediaExtensionError == true" class="err-msg">
+                  Please upload valid image.
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" (click)="enableEdit()">
+            <i class="fa fa-edit"> Edit</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" [routerLink]="['/blogManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="width: 120%;">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'edit'" type="submit" class="btn btn-pill btn-dark">
+            <i class="fa fa-edit"> Update</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'edit'" type="button" class="btn btn-pill btn-dark" [routerLink]="['/blogManagement']">
+            <i class="fa fa-close"> Cancel</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

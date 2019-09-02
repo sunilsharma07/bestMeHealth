@@ -1,0 +1,118 @@
+<div class="card">
+  <form [formGroup]="addForm" class="form-validate mb-lg" role="form" name="addForm" novalidate="" (submit)="addFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Admin
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">First Name</label>
+              <div class="col-sm-12">
+                <input placeholder="First Name" type="text" name="firstName" formControlName="firstName" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addForm.controls.firstName.invalid) || addForm.controls.firstName.touched">
+                  <div *ngIf="addForm.hasError('required','firstName')" class="err-msg">
+                    Please enter your first name.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','firstName') && addForm.hasError('pattern','firstName')"
+                    class="err-msg">
+                    First name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!addForm.hasError('pattern','firstName') && !addForm.hasError('required','firstName') && addForm.hasError('minlength','firstName')"
+                    class="err-msg">
+                    First name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Last Name</label>
+              <div class="col-sm-12">
+                <input placeholder="Last Name" type="text" name="lastName" formControlName="lastName" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addForm.controls.lastName.invalid) || addForm.controls.lastName.touched">
+                  <div *ngIf="addForm.hasError('required','lastName')" class="err-msg">
+                    Please enter your last name.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','lastName') && addForm.hasError('pattern','lastName')" class="err-msg">
+                    Last name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!addForm.hasError('pattern','lastName') && !addForm.hasError('required','lastName') && addForm.hasError('minlength','lastName')"
+                    class="err-msg">
+                    Last name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Email</label>
+              <div class="col-sm-12">
+                <input placeholder="Email" type="text" name="email" formControlName="email" class="form-control" />
+                <div *ngIf="(submitted && addForm.controls.email.invalid) || addForm.controls.email.touched">
+                  <div *ngIf="addForm.hasError('required','email')" class="err-msg">
+                    Please enter your email.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','email') && addForm.hasError('pattern','email')  || addForm.hasError('email','email')"
+                    class="err-msg">
+                    Please enter valid email address.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Phone Number</label>
+              <div class="col-sm-12">
+                <input placeholder="Phone Number" type="text" name="contactNumber" formControlName="contactNumber"
+                  class="form-control" minlength="8" maxlength="15" />
+                <div *ngIf="(submitted && addForm.controls.contactNumber.invalid) || addForm.controls.contactNumber.touched">
+                  <div *ngIf="addForm.hasError('required','contactNumber')" class="err-msg">
+                    Please enter your phone number.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','contactNumber') && addForm.hasError('pattern','contactNumber')"
+                    class="err-msg">
+                    Please enter valid phone number.
+                  </div>
+                  <div *ngIf="!addForm.hasError('pattern','contactNumber') && !addForm.hasError('required','contactNumber') && addForm.hasError('minlength','contactNumber')"
+                    class="err-msg">
+                    Phone number should contain at least 8 digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Role</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Role'" [data]="pemissiondropdownList" [settings]="pemissiondropdownSettings"
+                  formControlName="permissions">
+                </ng-multiselect-dropdown>
+                <div *ngIf="(submitted && addForm.controls.permissions.invalid) || addForm.controls.permissions.touched">
+                  <div *ngIf="addForm.hasError('required','permissions')" class="err-msg">
+                    Please select roles.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/adminManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

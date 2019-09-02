@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-cutlery"></i> Recipe Listing</span>
+    <button style="float: right;" [routerLink]="['/recipeManagement/addRecipe']" class="btn btn-pill btn-success"><i
+        class="fa fa-plus"></i>
+      Add New Recipe</button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Directions</th>
+            <th>Food Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="recipes?.length != 0">
+          <tr *ngFor="let recipe of recipes">
+            <td>{{ recipe.title }}</td>
+            <td>{{recipe.directions}}</td>
+            <td *ngIf="recipe.foodType == 'veg'">Veg</td>
+            <td *ngIf="recipe.foodType == 'nonveg'">Non-Veg</td>
+            <td *ngIf="recipe.foodType == 'vegan'">Vegan</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/recipeManagement/recipeDetails', recipe._id]"><i
+                  class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <button *ngIf="recipe.isActive == false" (click)="changedRecipeStatus(recipe._id, 'active')" class="btn btn-success btn-pill"><i
+                  class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="recipe.isActive == true" (click)="changedRecipeStatus(recipe._id, 'inactive')" class="btn btn-warning btn-pill"><i
+                  class="fa fa-ban">
+                  In-Active</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="recipes?.length == 0">
+          <tr>
+            <td colspan="4" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

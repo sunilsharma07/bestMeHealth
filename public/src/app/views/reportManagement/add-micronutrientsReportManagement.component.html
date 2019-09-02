@@ -1,0 +1,82 @@
+<div class="card">
+  <form [formGroup]="addForm" class="form-validate mb-lg" role="form" name="addForm" novalidate="" (submit)="addFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Report
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row" formArrayName="formData" *ngFor="let room of formElemets.controls; let i = index">
+          <ng-container [formGroupName]="i">
+            <fieldset class="col-md-3">
+              <div class="form-group">
+                <label class="col-sm-12 control-label">Category</label>
+                <div class="col-sm-12">
+                  <ng-multiselect-dropdown [placeholder]="'Select Category'" (onSelect)="onCategorySelect($event)"
+                    [data]="categoryList" [settings]="categoryDropdownSettings" formControlName="categoryId">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="(submitted && addForm.controls.formData.controls[i].controls.categoryId.invalid)">
+                    <div *ngIf="addForm.controls.formData.controls[i].hasError('required','categoryId')" class="err-msg">
+                      Please select category.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="col-md-3">
+              <div class="form-group">
+                <label class="col-sm-12 control-label">Content</label>
+                <div class="col-sm-12">
+                  <ng-multiselect-dropdown [placeholder]="'Select Content'" (onSelect)="onContentSelect($event)" [data]="categoryContentList"
+                    [settings]="contentDropdownSettings" formControlName="contentId">
+                  </ng-multiselect-dropdown>
+                  <div *ngIf="(submitted && addForm.controls.formData.controls[i].controls.contentId.invalid)">
+                    <div *ngIf="addForm.controls.formData.controls[i].hasError('required','contentId')" class="err-msg">
+                      Please select content.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="col-md-3">
+              <div class="form-group">
+                <label class="col-sm-12 control-label">Result (% control)</label>
+                <div class="col-sm-12">
+                  <input placeholder="Result" type="text" name="result" formControlName="result" class="form-control"
+                    maxlength="20" />
+                  <div *ngIf="(submitted && addForm.controls.formData.controls[i].controls.result.invalid)">
+                    <div *ngIf="addForm.controls.formData.controls[i].hasError('required','result')" class="err-msg">
+                      Please enter result.
+                    </div>
+                  </div>
+                  <div *ngIf="!addForm.controls.formData.controls[i].hasError('required','result') && addForm.controls.formData.controls[i].hasError('pattern','result')"
+                    class="err-msg">
+                    Result field should contain only nummeric value.
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset *ngIf="i > 0" class="col-md-3">
+              <label class="col-sm-12 control-label">&nbsp;</label>
+              <div class="col-sm-12">
+                <button class="btn btn-pill btn-danger" type="button" (click)="removeFormElements(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </fieldset>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="button" (click)="addFormElements()">
+        <i class="fa fa-plus"> Add More</i>
+      </button>&nbsp;
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/reportManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

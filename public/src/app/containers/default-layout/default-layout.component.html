@@ -1,0 +1,69 @@
+<app-header [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 130, height: 54, alt: 'Best Me Health Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'Best Me Health Logo'}"
+  [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+        dropdownToggle (click)="false">
+        <img src="assets/img/brand/sygnet.svg" class="img-avatar" alt="admin@bestmehealth.com" />
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="dropdown-header text-center"><strong>Settings</strong></div>
+        <a class="dropdown-item" [routerLink]="['/userProfile']"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" *ngIf="adminDetails.userType == 'superDoctor' || adminDetails.userType == 'subDoctor'"
+          [routerLink]="['/changedSlots']"><i class="fa fa-edit"></i> Change Slots</a>
+        <a class="dropdown-item" *ngIf="adminDetails.userType == 'superDoctor' || adminDetails.userType == 'subDoctor'"
+          [routerLink]="['/addHoliday']"><i class="fa fa-cog"></i> Add Holiday</a>
+        <a class="dropdown-item" [routerLink]="['/changePassword']"><i class="fa fa-key"></i> Change Password</a>
+        <a class="dropdown-item" style="cursor: pointer;" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+  </ul>
+</app-header>
+<div class="app-body">
+  <!-- <div *ngFor='let menuItem of menuPermission'> -->
+  <app-sidebar ng-reflect-nav-items="[object Object],[object Object" ng-reflect-disabled="false"
+    class="sidebar-nav ps cusSidebar" role="nav" [fixed]="true" [display]="'lg'">
+    <!-- <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav> -->
+
+    <!-- CUSTOM -->
+    <ul class="nav cusScroll">
+      <li appnavdropdown="" routerlinkactive="open" class="nav-item nav-dropdown open ng-star-inserted"
+        ng-reflect-ng-class="nav-item nav-dropdown" ng-reflect-router-link-active="open">
+        <ul _ngcontent-c1="" class="nav-dropdown-items">
+          <li *ngFor='let menuItem of menuPermission' class="nav-item ng-star-inserted" ng-reflect-ng-class="nav-item">
+            <a *ngxPermissionsOnly="menuItem.permission" routerlinkactive="active" class="ng-star-inserted nav-link"
+              [routerLink]=menuItem.link [routerLinkActive]="'active'">
+              <i class="{{menuItem.icon}}"></i>&nbsp;
+              {{menuItem.moduleName}}
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- CUSTOM -->
+
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- </div> -->
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <!-- <ol class="breadcrumb"></ol> -->
+    <p></p>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+      <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+      <ngx-ui-loader fgsColor="#20a8d8" fgsPosition="center-center" fgsSize=80 fgsType="ball-spin" bgsColor=""
+        bgsOpacity="" bgsSize="" gap=24 logoSize="" logoUrl="" overlayColor="" pbColor="#00ACC1" pbDirection="ltr"
+        pbThickness=0 hasProgressBar=false text="Please Wait..." textColor="#FFFFFF" textPosition="center-center">
+      </ngx-ui-loader>
+    </div>
+  </main>
+</div>
+<app-footer>
+  <span><a target="_blank" href="https://purehealthmiami.com">Bestme Health</a> &copy; {{currentYear}}</span>
+  <span class="ml-auto">Powered by <a target="_blank" href="https://purehealthmiami.com">Bestme Health</a></span>
+</app-footer>

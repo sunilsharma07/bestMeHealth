@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-bullhorn"></i>Tip Listing
+    <button style="float:right" [routerLink]="['/tipManagement/addTip']" class="btn btn-pill btn-success"><i
+        class="fa fa-plus"> Add Tip</i></button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Tip Type</th>
+            <th>Added By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="tips?.length != 0">
+          <tr *ngFor="let tip of tips">
+            <td>{{tip.title}}</td>
+            <td>{{tip.description}}</td>
+            <td>{{tip.tipType}}</td>
+            <td>{{tip.whoAdded}}</td>
+            <td>
+              <button class="btn btn-pill btn-dark" [routerLink]="['/tipManagement/tipDetails', tip._id]"><i
+                  class="fa fa-eye"> View</i></button>&nbsp;
+              <button class="btn btn-pill btn-danger" (click)="deleteTip(tip._id)"><i class="fa fa-close">
+                  Delete</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="tips?.length == 0">
+          <tr>
+            <td colspan="4" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

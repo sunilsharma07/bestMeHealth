@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-info-circle"></i> Content Listing</span>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="contents?.length != 0">
+          <tr *ngFor="let content of contents">
+            <td>{{ content.title }}</td>
+            <td>{{ content.description | slice:0:190 }} ...</td>
+            <td>
+              <button class="btn btn-pill btn-dark" [routerLink]="['/contentManagement/contentDetails', content._id]">
+                <i class="fa fa-eye"> View</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="contents?.length == 0">
+          <tr>
+            <td colspan="3" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

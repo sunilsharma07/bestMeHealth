@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-users"></i> Nutrition Listing</span>
+    <button style="float: right;" [routerLink]="['/nutritionManagement/addNutrition']" class="btn btn-pill btn-success"><i
+        class="fa fa-plus"></i>
+      Add Nutrition</button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="nutritions?.length != 0">
+          <tr *ngFor="let nutrition of nutritions">
+            <td>{{ nutrition.firstName }}</td>
+            <td>{{ nutrition.lastName }}</td>
+            <td>{{ nutrition.email }}</td>
+            <td *ngIf="nutrition.userType == 'superNutrition'">Super Nutrition</td>
+            <td *ngIf="nutrition.userType == 'subNutrition'">Sub Nutrition</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/nutritionManagement/nutritionDetails', nutrition._id]"><i
+                  class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <button *ngIf="nutrition.isActive == false" (click)="changedNutritionstatus(nutrition._id, 'active')"
+                class="btn btn-success btn-pill"><i class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="nutrition.isActive == true" (click)="changedNutritionstatus(nutrition._id, 'inactive')"
+                class="btn btn-warning btn-pill"><i class="fa fa-ban">
+                  In-Active</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="nutritions?.length == 0">
+          <tr>
+            <td colspan="5" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

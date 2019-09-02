@@ -1,0 +1,335 @@
+<div *ngIf="reportAddType == 'manual'" class="card">
+  <form [formGroup]="addForm" class="form-validate mb-lg" role="form" name="addForm" novalidate="" (submit)="addFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Report
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Row ID</label>
+              <div class="col-sm-12">
+                <input placeholder="Row ID" type="text" name="RowID" formControlName="RowID" class="form-control"
+                  maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.RowID.invalid) || addForm.controls.RowID.touched">
+                  <div *ngIf="addForm.hasError('required','RowID')" class="err-msg">
+                    Please enter row id.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','RowID') && addForm.hasError('pattern','RowID')" class="err-msg">
+                    Row id field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Created Date</label>
+              <div class="col-sm-12 input-group date">
+                <input placeholder="Created Date" type="text" #dp="bsDatepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD-MMM-YY' }"
+                  name="CreatedDate" formControlName="CreatedDate" class="form-control" disabled />
+                <span class="input-group-addon btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                  <i class="fa fa-calendar"></i>
+                </span>
+                <div *ngIf="(submitted && addForm.controls.CreatedDate.invalid) || addForm.controls.CreatedDate.touched">
+                  <div *ngIf="addForm.hasError('required','CreatedDate')" class="err-msg">
+                    Please select date.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Created By</label>
+              <div class="col-sm-12">
+                <input placeholder="Created By" type="text" name="CreatedBy" formControlName="CreatedBy" class="form-control"
+                  maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.CreatedBy.invalid) || addForm.controls.CreatedBy.touched">
+                  <div *ngIf="addForm.hasError('required','CreatedBy')" class="err-msg">
+                    Please enter created by.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','CreatedBy') && addForm.hasError('pattern','CreatedBy')"
+                    class="err-msg">
+                    created by field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Frequency ID</label>
+              <div class="col-sm-12">
+                <input placeholder="Frequency ID" type="text" name="FrequencyID" formControlName="FrequencyID" class="form-control"
+                  maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.FrequencyID.invalid) || addForm.controls.FrequencyID.touched">
+                  <div *ngIf="addForm.hasError('required','FrequencyID')" class="err-msg">
+                    Please enter frequency id.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','FrequencyID') && addForm.hasError('pattern','FrequencyID')"
+                    class="err-msg">
+                    Frequency id field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Antigen ID</label>
+              <div class="col-sm-12">
+                <input placeholder="Antigen ID" type="text" name="AntigenID" formControlName="AntigenID" class="form-control"
+                  maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.AntigenID.invalid) || addForm.controls.AntigenID.touched">
+                  <div *ngIf="addForm.hasError('required','AntigenID')" class="err-msg">
+                    Please enter antigen id.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','AntigenID') && addForm.hasError('pattern','AntigenID')"
+                    class="err-msg">
+                    Antigen id field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Antigen Name</label>
+              <div class="col-sm-12">
+                <input placeholder="Antigen Name" type="text" name="AntigenName" formControlName="AntigenName" class="form-control"
+                  maxlength="15" />
+                <div *ngIf="(submitted && addForm.controls.AntigenName.invalid) || addForm.controls.AntigenName.touched">
+                  <div *ngIf="addForm.hasError('required','AntigenName')" class="err-msg">
+                    Please enter antigen name.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Test ID</label>
+              <div class="col-sm-12">
+                <input placeholder="Test ID" type="text" name="TestID" formControlName="TestID" class="form-control"
+                  maxlength="15" />
+                <div *ngIf="(submitted && addForm.controls.TestID.invalid) || addForm.controls.TestID.touched">
+                  <div *ngIf="addForm.hasError('required','TestID')" class="err-msg">
+                    Please enter test id.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','TestID') && addForm.hasError('pattern','TestID')" class="err-msg">
+                    Test id field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Category</label>
+              <div class="col-sm-12">
+                <!-- <input placeholder="Category" type="text" name="category" formControlName="category" class="form-control" /> -->
+                <select name="category" formControlName="category" class="form-control">
+                  <option value="0">None</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                </select>
+                <div *ngIf="(submitted && addForm.controls.category.invalid) || addForm.controls.category.touched">
+                  <div *ngIf="addForm.hasError('required','category')" class="err-msg">
+                    Please select category.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Plate</label>
+              <div class="col-sm-12">
+                <input placeholder="Plate" type="text" name="Plate" formControlName="Plate" class="form-control"
+                  maxlength="10" />
+                <div *ngIf="(submitted && addForm.controls.Plate.invalid) || addForm.controls.Plate.touched">
+                  <div *ngIf="addForm.hasError('required','Plate')" class="err-msg">
+                    Please enter plate.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','Plate') && addForm.hasError('pattern','Plate')" class="err-msg">
+                    Plate field should contain only characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Lot</label>
+              <div class="col-sm-12">
+                <input placeholder="Lot" type="text" name="Lot" formControlName="Lot" class="form-control" maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.Lot.invalid) || addForm.controls.Lot.touched">
+                  <div *ngIf="addForm.hasError('required','Lot')" class="err-msg">
+                    Please enter lot.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','Lot') && addForm.hasError('pattern','Lot')" class="err-msg">
+                    Lot field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Rev</label>
+              <div class="col-sm-12">
+                <input placeholder="Rev" type="text" name="Rev" formControlName="Rev" class="form-control" maxlength="7" />
+                <div *ngIf="(submitted && addForm.controls.Rev.invalid) || addForm.controls.Rev.touched">
+                  <div *ngIf="addForm.hasError('required','Rev')" class="err-msg">
+                    Please enter rev.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','Rev') && addForm.hasError('pattern','Rev')" class="err-msg">
+                    Rev field should contain only digits, dashes and dots.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">ODValue</label>
+              <div class="col-sm-12">
+                <input placeholder="ODValue" type="text" name="ODValue" formControlName="ODValue" class="form-control"
+                  maxlength="7" />
+                <div *ngIf="(submitted && addForm.controls.ODValue.invalid) || addForm.controls.ODValue.touched">
+                  <div *ngIf="addForm.hasError('required','ODValue')" class="err-msg">
+                    Please enter odvalue.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','ODValue') && addForm.hasError('pattern','ODValue')" class="err-msg">
+                    Odvalue field should contain only digits, dashes and dots.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-2">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">TestNum</label>
+              <div class="col-sm-12">
+                <input placeholder="TestNum" type="text" name="TestNum" formControlName="TestNum" class="form-control"
+                  maxlength="5" />
+                <div *ngIf="(submitted && addForm.controls.TestNum.invalid) || addForm.controls.TestNum.touched">
+                  <div *ngIf="addForm.hasError('required','TestNum')" class="err-msg">
+                    Please enter testnum.
+                  </div>
+                  <div *ngIf="!addForm.hasError('required','TestNum') && addForm.hasError('pattern','TestNum')" class="err-msg">
+                    Testnum field should contain only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Add to Report</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/reportManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="reportAddType == 'manual'" class="card">
+  <div class="card-header">
+    <i class="fa fa-user"></i>Current Report Data
+    <button type="button" style="float:right" class="btn btn-dark" (click)="saveTestReport()">
+      <i class="fa fa-file"> Generate Report</i>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>RowID</th>
+            <th>Created Date</th>
+            <th>CreatedBy</th>
+            <th>FrequencyID</th>
+            <th>AntigenName</th>
+            <th>TestID</th>
+            <th>Category</th>
+            <th>Plate</th>
+            <th>Lot</th>
+            <th>Rev</th>
+            <th>ODValue</th>
+            <th>TestNum</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tempReport of tempReportData; let i = index">
+            <td>{{ tempReport.RowID }}</td>
+            <td>{{ tempReport.CreatedDate | date:"dd-MMM-yy" }}</td>
+            <td>{{ tempReport.CreatedBy }}</td>
+            <td>{{ tempReport.FrequencyID }}</td>
+            <td>{{ tempReport.AntigenName }}</td>
+            <td>{{ tempReport.TestID }}</td>
+            <td>{{ tempReport.category }}</td>
+            <td>{{ tempReport.Plate }}</td>
+            <td>{{ tempReport.Lot }}</td>
+            <td>{{ tempReport.Rev }}</td>
+            <td>{{ tempReport.ODValue }}</td>
+            <td>{{ tempReport.TestNum }}</td>
+            <td>
+              <button (click)="deleteTempRecord(tempReport._id, i)" class="btn btn-danger btn-pill"><i class="fa fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>
+
+<div *ngIf="reportAddType == 'upload'" class="card">
+  <form [formGroup]="uploadForm" class="form-validate mb-lg" role="form" name="uploadForm" novalidate="" (submit)="uploadFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Report
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Report</label>
+              <div class="col-sm-12">
+                <input type="file" (change)="onFileChange($event)" name="reportFile" formControlName="reportFile" class="form-control" />
+                <div *ngIf="(submitted && uploadForm.controls.reportFile.invalid) || uploadForm.controls.reportFile.touched">
+                  <div *ngIf="uploadForm.hasError('required','reportFile')" class="err-msg">
+                    Please upload report.
+                  </div>
+                </div>
+                <div *ngIf="isFileExtensionError == true" class="err-msg">
+                  Please upload CSV file.
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/reportManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

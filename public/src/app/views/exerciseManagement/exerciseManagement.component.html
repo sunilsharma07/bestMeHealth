@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-child"></i>Exercise Listing
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let exercise of exerciseList; let i = index">
+            <td>{{ exercise.name}}</td>
+            <td>{{ exercise.categoryName}}</td>
+            <td>
+              <button [routerLink]="['/exerciseManagement/exerciseDetails', exercise._id]"
+                class="btn btn-dark btn-pill"><i class="fa fa-eye">
+                  View</i></button>
+              <button *ngIf="exercise.isActive == false" (click)="changedExerciseStatus(exercise._id, 'active', i)"
+                class="btn btn-success btn-pill"><i class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="exercise.isActive == true" (click)="changedExerciseStatus(exercise._id, 'inactive', i)"
+                class="btn btn-warning btn-pill"><i class="fa fa-ban">
+                  In-Active</i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

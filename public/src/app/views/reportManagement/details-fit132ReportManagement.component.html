@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-user"></i>Manage Report
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <div class="">
+        <div class="example-container">
+          <h2>Severe (1+)</h2>
+
+          <div cdkDropList #onePlus="cdkDropList" [cdkDropListData]="reportResults[1]" [cdkDropListConnectedTo]="[twoPlus, threePlus, fourPlus, fivePlus]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of reportResults[1]" cdkDrag>{{getIngredeintsName(item)}}</div>
+          </div>
+        </div>
+
+        <div class="example-container">
+          <h2>Moderate (2+)</h2>
+
+          <div cdkDropList #twoPlus="cdkDropList" [cdkDropListData]="reportResults[2]" [cdkDropListConnectedTo]="[onePlus, threePlus, fourPlus, fivePlus]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of reportResults[2]" cdkDrag>{{getIngredeintsName(item)}}</div>
+          </div>
+        </div>
+
+        <div class="example-container">
+          <h2>Mild (3+)</h2>
+
+          <div cdkDropList #threePlus="cdkDropList" [cdkDropListData]="reportResults[3]" [cdkDropListConnectedTo]="[onePlus, twoPlus, fourPlus, fivePlus]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of reportResults[3]" cdkDrag>{{getIngredeintsName(item)}}</div>
+          </div>
+        </div>
+
+        <div class="example-container">
+          <h2>Acceptable (4+)</h2>
+
+          <div cdkDropList #fourPlus="cdkDropList" [cdkDropListData]="reportResults[4]" [cdkDropListConnectedTo]="[onePlus, twoPlus, threePlus, fivePlus]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of reportResults[4]" cdkDrag>{{getIngredeintsName(item)}}</div>
+          </div>
+        </div>
+
+        <div class="example-container">
+          <h2>Reintroduced</h2>
+
+          <div cdkDropList #fivePlus="cdkDropList" [cdkDropListData]="reportResults[5]" [cdkDropListConnectedTo]="[onePlus, twoPlus, threePlus, fourPlus]"
+            class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of reportResults[5]" cdkDrag>{{getIngredeintsName(item)}}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-pill btn-dark" type="button" (click)="updateReport()">
+      <i class="fa fa-edit"> Update</i>
+    </button>&nbsp;
+    <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/reportManagement', customerId]">
+      <i class="fa fa-backward"> Back</i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="card">
+  <form [formGroup]="addChefForm" class="form-validate mb-lg" role="form" name="addChefForm" novalidate="" (submit)="addChefFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Chef
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">First Name</label>
+              <div class="col-sm-12">
+                <input placeholder="First Name" type="text" name="firstName" formControlName="firstName" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addChefForm.controls.firstName.invalid) || addChefForm.controls.firstName.touched">
+                  <div *ngIf="addChefForm.hasError('required','firstName')" class="err-msg">
+                    Please enter your first name.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('required','firstName') && addChefForm.hasError('pattern','firstName')"
+                    class="err-msg">
+                    First name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('pattern','firstName') && !addChefForm.hasError('required','firstName') && addChefForm.hasError('minlength','firstName')"
+                    class="err-msg">
+                    First name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Last Name</label>
+              <div class="col-sm-12">
+                <input placeholder="Last Name" type="text" name="lastName" formControlName="lastName" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addChefForm.controls.lastName.invalid) || addChefForm.controls.lastName.touched">
+                  <div *ngIf="addChefForm.hasError('required','lastName')" class="err-msg">
+                    Please enter your last name.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('required','lastName') && addChefForm.hasError('pattern','lastName')"
+                    class="err-msg">
+                    Last name field should be accept only characters.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('pattern','lastName') && !addChefForm.hasError('required','lastName') && addChefForm.hasError('minlength','lastName')"
+                    class="err-msg">
+                    Last name should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Email</label>
+              <div class="col-sm-12">
+                <input placeholder="Email" type="text" name="email" formControlName="email" class="form-control" />
+                <div *ngIf="(submitted && addChefForm.controls.email.invalid) || addChefForm.controls.email.touched">
+                  <div *ngIf="addChefForm.hasError('required','email')" class="err-msg">
+                    Please enter your email.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('required','email') && addChefForm.hasError('pattern','email')  || addChefForm.hasError('email','email')"
+                    class="err-msg">
+                    Please enter valid email address.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Phone Number</label>
+              <div class="col-sm-12">
+                <input placeholder="Phone Number" type="text" name="contactNumber" formControlName="contactNumber"
+                  class="form-control" minlength="8" maxlength="15" />
+                <div *ngIf="(submitted && addChefForm.controls.contactNumber.invalid) || addChefForm.controls.contactNumber.touched">
+                  <div *ngIf="addChefForm.hasError('required','contactNumber')" class="err-msg">
+                    Please enter your phone number.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('required','contactNumber') && addChefForm.hasError('pattern','contactNumber')"
+                    class="err-msg">
+                    Please enter valid phone number.
+                  </div>
+                  <div *ngIf="!addChefForm.hasError('pattern','contactNumber') && !addChefForm.hasError('required','contactNumber') && addChefForm.hasError('minlength','contactNumber')"
+                    class="err-msg">
+                    Phone number should contain at least 8 digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Role</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Role'" [data]="pemissiondropdownList" [settings]="pemissiondropdownSettings"
+                  formControlName="permissions">
+                </ng-multiselect-dropdown>
+                <div *ngIf="(submitted && addChefForm.controls.permissions.invalid) || addChefForm.controls.permissions.touched">
+                  <div *ngIf="addChefForm.hasError('required','permissions')" class="err-msg">
+                    Please select roles.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/chefManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

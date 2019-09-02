@@ -1,0 +1,73 @@
+<div class="card">
+  <form [formGroup]="addBlogForm" class="form-validate mb-lg" role="form" name="addBlogForm" novalidate="" (submit)="addBlogFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Blog
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Blog Title</label>
+              <div class="col-sm-12">
+                <input placeholder="Title" type="text" name="title" formControlName="title" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addBlogForm.controls.title.invalid) || addBlogForm.controls.title.touched">
+                  <div *ngIf="addBlogForm.hasError('required','title')" class="err-msg">
+                    Please enter title.
+                  </div>
+                  <div *ngIf="!addBlogForm.hasError('required','title') && addBlogForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Title field should be accept only characters.
+                  </div>
+                  <div *ngIf="!addBlogForm.hasError('pattern','title') && !addBlogForm.hasError('required','title') && addBlogForm.hasError('minlength','title')"
+                    class="err-msg">
+                    Title should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Blog Details</label>
+              <div class="col-sm-12">
+                <ckeditor [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }" formControlName="details"></ckeditor>
+                <!-- <ckeditor [editor]="Editor" (change)="onChange($event)" formControlName="details"></ckeditor> -->
+                <div *ngIf="(submitted && addBlogForm.controls.details.invalid) || addBlogForm.controls.details.touched">
+                  <div *ngIf="addBlogForm.hasError('required','details')" class="err-msg">
+                    Please enter blog details.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Blog Media</label>
+              <div class="col-sm-12">
+                <input type="file" (change)="onFileChange($event)" name="media" formControlName="media" class="form-control" />
+                <div *ngIf="(submitted && addBlogForm.controls.media.invalid) || addBlogForm.controls.media.touched">
+                  <div *ngIf="addBlogForm.hasError('required','media')" class="err-msg">
+                    Please upload blog media.
+                  </div>
+                </div>
+                <div *ngIf="isMediaExtensionError == true" class="err-msg">
+                  Please upload valid image.
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/blogManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

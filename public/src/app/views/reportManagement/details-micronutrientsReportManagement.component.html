@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-user"></i>Manage Report
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <div class="row">
+        <fieldset class="col-md-12" *ngFor="let category of categoryResult">
+          <label class="col-sm-12 control-label">{{category.name}}</label>
+          <ng-container *ngFor="let result of reportResults; let i = index">
+            <div *ngIf="category._id == result.categoryId" class="form-group row" style="margin-left:15px">
+              <div class="col-sm-3">
+                <span>{{getContentName(result.contentId)}} : </span>
+              </div>
+              <div class="col-sm-5">
+                <input *ngIf="action == 'view'" type="text" name="result" value="{{result.result}}" class="form-control"
+                  readonly="true" />
+                <input *ngIf="action == 'edit'" type="text" name="result" value="{{result.result}}" pattern="[-+]?[0-9]*\.?[0-9]*."
+                  class="form-control" (blur)="updateResultArray(i, $event)" />
+                <div *ngIf="result.result == ''" class="err-msg">
+                  Please enter result.
+                </div>
+                <div *ngIf="result.result != '' && result.error == true" class="err-msg">
+                  Result field should contain only nummeric value.
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button *ngIf="action == 'view'" class="btn btn-pill btn-dark" type="button" (click)="enableEdit()">
+      <i class="fa fa-edit"> Edit</i>
+    </button>&nbsp;
+    <button *ngIf="action == 'edit'" class="btn btn-pill btn-dark" type="button" (click)="updateReport()">
+      <i class="fa fa-check"> Save</i>
+    </button>&nbsp;
+    <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/reportManagement', customerId]">
+      <i class="fa fa-backward"> Back</i>
+    </button>
+  </div>
+</div>

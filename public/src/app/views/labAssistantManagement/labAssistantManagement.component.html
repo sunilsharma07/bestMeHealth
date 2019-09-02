@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-users"></i> Lab Assistant Listing</span>
+    <button style="float: right;" [routerLink]="['/labAssistantManagement/addLabAssistant']" class="btn btn-pill btn-success"><i
+        class="fa fa-plus"></i>
+      Add Lab Assistant</button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="labAssistants?.length != 0">
+          <tr *ngFor="let labAssistant of labAssistants">
+            <td>{{ labAssistant.firstName }}</td>
+            <td>{{ labAssistant.lastName }}</td>
+            <td>{{ labAssistant.email }}</td>
+            <td *ngIf="labAssistant.userType == 'superLabAssistant'">Super Lab Assistant</td>
+            <td *ngIf="labAssistant.userType == 'subLabAssistant'">Sub Lab Assistant</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/labAssistantManagement/labAssistantDetails', labAssistant._id]"><i
+                  class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <button *ngIf="labAssistant.isActive == false" (click)="changedLabAssistantstatus(labAssistant._id, 'active')"
+                class="btn btn-success btn-pill"><i class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="labAssistant.isActive == true" (click)="changedLabAssistantstatus(labAssistant._id, 'inactive')"
+                class="btn btn-warning btn-pill"><i class="fa fa-ban">
+                  In-Active</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="labAssistants?.length == 0">
+          <tr>
+            <td colspan="5" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

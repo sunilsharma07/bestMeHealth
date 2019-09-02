@@ -1,0 +1,73 @@
+<div class="card">
+  <form [formGroup]="detailsChefForm" class="form-validate mb-lg" role="form" name="detailsChefForm" novalidate=""
+    (submit)="updateFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Chef Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">First Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="First Name" type="text" name="firstName" formControlName="firstName"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Last Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Last Name" type="text" name="lastName" formControlName="lastName"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Email</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Email" type="text" name="email" formControlName="email"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Phone Number</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Phone Number" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Role</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown *ngIf="action == 'view'" [placeholder]="'Select Role'" [data]="pemissiondropdownList"
+                  [settings]="pemissiondropdownSettings" [(ngModel)]="pemissionselectedItems" formControlName="permissions">
+                </ng-multiselect-dropdown>
+                <div *ngIf="(submitted && detailsChefForm.controls.permissions.invalid) || detailsChefForm.controls.permissions.touched">
+                  <div *ngIf="detailsChefForm.hasError('required','permissions')" class="err-msg">
+                    Please select role.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Update</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/chefManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,99 @@
+<div class="card">
+  <form [formGroup]="addCookingVideoForm" class="form-validate mb-lg" role="form" name="addCookingVideoForm"
+    novalidate="" (submit)="addCookingVideoFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-youtube-play"></i>Add Cooking Video
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Type</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Type'" [data]="videoTypeList"
+                  [settings]="typedropdownSettings" formControlName="type">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="(submitted && addCookingVideoForm.controls.type.invalid) || addCookingVideoForm.controls.type.touched">
+                  <div *ngIf="addCookingVideoForm.hasError('required','type')" class="err-msg">
+                    Please select type.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Category</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Category'" [data]="allCategory"
+                  [settings]="categoryopdownSettings" formControlName="category">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="(submitted && addCookingVideoForm.controls.category.invalid) || addCookingVideoForm.controls.category.touched">
+                  <div *ngIf="addCookingVideoForm.hasError('required','category')" class="err-msg">
+                    Please select category.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input placeholder="Title" type="text" name="title" formControlName="title" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div
+                  *ngIf="(submitted && addCookingVideoForm.controls.title.invalid) || addCookingVideoForm.controls.title.touched">
+                  <div *ngIf="addCookingVideoForm.hasError('required','title')" class="err-msg">
+                    Please enter your title.
+                  </div>
+                  <div
+                    *ngIf="!addCookingVideoForm.hasError('required','title') && addCookingVideoForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Please enter valid title.
+                  </div>
+                  <div
+                    *ngIf="!addCookingVideoForm.hasError('pattern','title') && !addCookingVideoForm.hasError('required','title') && addCookingVideoForm.hasError('minlength','title')"
+                    class="err-msg">
+                    Title should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Video Url</label>
+              <div class="col-sm-12">
+                <input placeholder="Video Url" type="text" name="videoUrl" formControlName="videoUrl"
+                  class="form-control" />
+                <div
+                  *ngIf="(submitted && addCookingVideoForm.controls.videoUrl.invalid) || addCookingVideoForm.controls.videoUrl.touched">
+                  <div *ngIf="addCookingVideoForm.hasError('required','videoUrl')" class="err-msg">
+                    Please enter your video url.
+                  </div>
+                  <div
+                    *ngIf="!addCookingVideoForm.hasError('required','videoUrl') && addCookingVideoForm.hasError('pattern','videoUrl')"
+                    class="err-msg">
+                    Please enter your video url.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/doctorManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,121 @@
+<div class="card">
+  <form [formGroup]="detailsRecipeForm" class="form-validate mb-lg" role="form" name="detailsRecipeForm" novalidate="">
+    <div class="card-header">
+      <i class="fa fa-cutlery"></i>Recipe Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-lg-12">
+            <div class="form-group customerProPic">
+              <div class="col-sm-12">
+                <img *ngIf="action == 'view'" (error)="onImageFoundError($event)" src="{{recipePic}}" class="customImg"
+                  name="profilePic" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Title" type="text" name="title" formControlName="title"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Category</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Category" type="text" name="category" formControlName="category"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Food Type</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Food Type" type="text" name="foodType" formControlName="foodType"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Preparation Time</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Preparation Timer" type="text" name="prepTime"
+                  formControlName="prepTime" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Serves</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Serves" type="text" name="serves" formControlName="serves"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Directions</label>
+              <div class="col-sm-12">
+                <textarea *ngIf="action == 'view'" placeholder="Directions" name="directions" formControlName="directions"
+                  class="form-control" readonly="true"></textarea>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Is recipe for sale?</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Is recipe for sale?" type="text" name="recipeForSale"
+                  formControlName="recipeForSale" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Recipe Price</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Recipe Price" type="text" name="recipePrice"
+                  formControlName="recipePrice" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Ingredients</label>
+              <div class="col-sm-12">
+                <table class="table table-bordered customTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Quantity</th>
+                      <th>Measure</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="cusingredients?.length != 0">
+                    <tr *ngFor="let ing of cusingredients">
+                      <td>{{ ing.title }}</td>
+                      <td>{{ ing.qty }}</td>
+                      <td>{{ ing.measure }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/recipeManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

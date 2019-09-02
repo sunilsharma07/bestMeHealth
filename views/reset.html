@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Best Me Health Reset Password</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+</head>
+<style>
+  body {
+    background-color: #677D92;
+}
+
+.wraper {
+    margin-top: 10em;
+}
+
+.logo {
+    text-align: center;
+}
+
+.logo img {
+    text-align: center;
+    /*margin-left: 10em;*/
+    height: 6em;
+    width: 6em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.submit-btn {
+    width: 12em;
+}
+</style>
+
+<body>
+  <div class="row wraper">
+    <div class="col-sm-offset-3  col-sm-5">
+      <div class="logo col-sm-offset-3">
+        <img src="../../uploads/logo/logo.jpg" />
+      </div>
+      <div class="form-group col-sm-offset-3">
+        <h3 class="text-center">Reset Password</h3>
+      </div>
+      <div class="form-group col-sm-offset-3">
+        <h4 class="text-center" style="color:lightgoldenrodyellow; font-weight:bold" id="response_text"></h4>
+      </div>
+    </div>
+    <form id="main_form" method="POST" action="" class="col-sm-offset-3  col-sm-5">
+      <input type="hidden" id="reset_token" name="reset_token" value="<%= reset_token %>" />
+      <div class="form-group col-sm-offset-3">
+        <p class="text-center" style="color:lightgoldenrodyellow; font-weight:bold" id="err_text"></p>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-3 col-form-label">New Password</label>
+        <div class="col-sm-9">
+          <input class="form-control" id="password" type="password" name="password" minlength="6" maxlength="16"
+            required onkeypress="return AvoidSpace(event)" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-3 col-form-label">Confirm Password</label>
+        <div class="col-sm-9">
+          <input class="form-control" id="confirm_password" type="password" name="confirm_password" minlength="6"
+            maxlength="16" required onkeypress="return AvoidSpace(event)" />
+        </div>
+      </div>
+      <div class="form-group col-sm-offset-3 text-center">
+        <input class="text-center submit-btn btn form-control" type="submit" value="Reset">
+      </div>
+    </form>
+    <script type="text/javascript">
+      function AvoidSpace(event) {
+        var k = event ? event.which : window.event.keyCode;
+        if (k == 32) return false;
+      }
+
+      $(document).ready(function () {
+        $("form").submit(function (e) {
+          e.preventDefault();
+          var data = {};
+          data.password = $('#password').val();
+          data.confirm_password = $('#confirm_password').val();
+          data.reset_token = $('#reset_token').val();
+
+          $.ajax({
+            // url: 'http://192.168.2.162:3000/v1/reset/' + data.reset_token,
+            url: 'http://202.131.117.92:7019/v1/reset/' + data.reset_token,
+            method: 'post',
+            data: {
+              password: $('#password').val(),
+              confirm_password: $('#confirm_password').val(),
+              reset_token: $('#reset_token').val()
+            },
+            //dataType: 'json',
+            success: function (data) {
+              $("#response_text").html(data.message);
+              data.password = $('#password').val('');
+              data.confirm_password = $('#confirm_password').val('');
+              // $('#main_form').hide();
+              //window.location = "https://www.heydoc.net"
+            },
+            error: function (data) {
+              data = JSON.parse(data.responseText)
+              $("#err_text").html(data.message);
+            }
+          });
+        });
+      });
+
+    </script>
+  </div>
+</body>
+
+</html>

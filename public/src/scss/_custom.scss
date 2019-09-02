@@ -1,0 +1,696 @@
+// Here you can add other styles
+.navbar-toggler:not(:disabled):not(.disabled) {
+  display: none;
+}
+
+.app-header .nav-item .nav-link>.img-avatar,
+.app-header .nav-item .avatar.nav-link>img {
+  height: 50px;
+  margin: 0 10px;
+}
+
+.marginClass {
+  height: 100vh;
+}
+
+.inline-btn {
+  height: 40px;
+  display: flex;
+  align-self: center;
+  margin-top: 12px;
+}
+
+.rmvBtnCss {
+  float: right;
+  margin-right: 200px;
+}
+
+label {
+  font-weight: bolder
+}
+
+.customTable {
+  text-align: center;
+}
+
+.addBtnCss {
+  float: left;
+}
+
+.custom-form-grp {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grp-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.loginPageLogo {
+  margin-left: 40%;
+  height: 100px;
+}
+
+.err-msg {
+  color: red;
+  font-weight: bold;
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.img-custom-avatar {
+  max-width: 100%;
+}
+
+.customImg {
+  height: 150px;
+  width: 150px;
+  border-radius: 20px;
+}
+
+.customerProPic {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ng-star-inserted+.odd .dataTables_empty {
+  display: none;
+}
+
+.no-data-available {
+  text-align: center
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.sidebar .nav-link.active {
+  // background: #277bb9;
+  background: #38616b
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #c8ced3;
+  font-weight: bolder;
+}
+
+.nav-tabs .nav-link {
+  color: white;
+}
+
+.nav-tabs .nav-item a {
+  cursor: not-allowed;
+}
+
+.nav-tabs .nav-item a .disabled {
+  cursor: not-allowed !important;
+}
+
+.nav-tabs {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.nav-tabs li a {
+  background-color: #A9A9A9 !important; //A9A9A9 20a8d8
+  border-radius: 50% !important;
+  display: inline-block !important;
+  padding: 27px 10px !important;
+  width: 100px;
+  height: 100px;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center;
+}
+
+.tab-content {
+  border: 0px solid transparent;
+  width: 100%;
+  float: left;
+  margin-top: 40px;
+}
+
+
+// custom check-box
+.check-grp {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+
+}
+
+.check-grp {
+  float: left;
+  width: 16%;
+
+}
+
+.custom-checkbox {
+  float: left;
+  position: absolute;
+  z-index: 1;
+  width: 50%;
+  height: 85%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  float: left;
+  padding-left: 35px;
+  cursor: pointer;
+  position: relative;
+  font-size: 22px;
+}
+
+.checkmark::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 0;
+  top: 0;
+  background-color: #ddd;
+  display: block !important;
+}
+
+.check-grp .checkmark::after {
+  left: 10px;
+  top: 7px;
+  width: 5px;
+  height: 10px;
+  border: solid blue;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  content: "";
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  display: block !important;
+}
+
+
+.check-grp input:checked~.checkmark::after {
+  opacity: 1;
+}
+
+.nav-tabs .nav-link.active {
+  color: #2f353a;
+  background: #20a8d8 !important;
+  border-color: #c8ced3;
+  border-bottom-color: #fff;
+}
+
+.nav-item .ng-star-inserted .disabled {
+  opacity: 0 !important;
+}
+
+.navbar-brand {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}
+
+.cusDivCls {
+  margin-left: 70px;
+}
+
+.cusPtag {
+  margin-left: 20px;
+}
+
+.cusPtagNA {
+  margin-left: 12px;
+}
+
+// Custom Radio Button CSS
+.cusRadioBtnLbl {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  float: left;
+  margin-right: 20px;
+}
+
+.cusRadioBtnLbl input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cusRadioBtnSpan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.cusRadioBtnLbl:hover input~.cusRadioBtnSpan {
+  background-color: #ccc;
+}
+
+.cusRadioBtnLbl input:checked~.cusRadioBtnSpan {
+  background-color: #2196F3;
+}
+
+.cusRadioBtnSpan:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.cusRadioBtnLbl input:checked~.cusRadioBtnSpan:after {
+  display: block;
+}
+
+.cusRadioBtnLbl .cusRadioBtnSpan:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.rmvLblClass {
+  font-weight: unset
+}
+
+.cus-col-2 {
+  width: 10%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+table {
+  max-width: 100%;
+}
+
+.meal-plan-add-btn-css {
+  float: right;
+  margin-right: -82px;
+}
+
+.add-btn-meal-plan-css {
+  float: right;
+  margin-right: 255px;
+}
+
+.gen-mel-pln-btn {
+  margin-bottom: 31px;
+  margin-top: -27px;
+}
+
+
+// Drag-Drop Animation CSS
+.example-container {
+  // width: 400px;
+  width: 200px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.example-list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cusTblExercise {
+  width: 100%;
+  // border-style: solid;
+  border: solid 1px;
+}
+
+.cusTblExercisetd {
+  padding: 10px;
+}
+
+.cusScroll {
+  overflow: scroll;
+  width: 100% !important;
+}
+
+.cusSidebar {
+  width: 15% !important;
+}
+
+
+/* Chat Management */
+
+.offers-notification.innerpage {
+  padding: 80px 0 90px;
+}
+
+.offers-noti-row {
+  margin-top: 60px;
+}
+
+.offers-noti-col-left {
+  background: #fff;
+  padding: 50px;
+}
+
+.offers-noti-col-right {
+  background-color: #f5f5f5;
+  padding: 0;
+}
+
+.offers-noti-col-inner ul li {
+  margin-bottom: 13px;
+  border: 1px solid transparent
+}
+
+.offers-noti-col-inner ul li a {
+  padding: 20px;
+  box-shadow: 0px 0px 0px 1px rgba(233, 233, 233, 0.9);
+  border-radius: 5px;
+}
+
+.offers-noti-col-inner ul li a:hover,
+.offers-noti-col-inner ul li a.active {
+  box-shadow: 0px 3px 4px 3px rgba(233, 233, 233, 0.9);
+  background-color: #f5f5f5;
+}
+
+.noti-profile-desc {
+  margin-left: 17px;
+  flex: 6;
+}
+
+.noti-name {
+  color: #585858;
+}
+
+.noti-desc p {
+  line-height: 18px;
+  color: #707070;
+}
+
+.noti-time {
+  color: #b4b4b4;
+  font-size: 15px;
+}
+
+.noti-profile-name {
+  margin-bottom: 10px;
+}
+
+.noti-profile-pic {
+  height: 60px;
+  width: 60px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.noti-profile-pic img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+h2.msgs:before {
+  background-image: url('assets/img/msgs-icon.svg');
+  top: 6px;
+}
+
+.offers-noti-col-inner h3 {
+  margin-bottom: 20px;
+}
+
+.noti-chat-desc {
+  padding: 50px 50px 20px 50px;
+  border-bottom: 1px solid #b4b4b4;
+}
+
+.noti-chat-desc-inner p {
+  line-height: normal;
+}
+
+.noti-chat-desc-inner {
+  padding-right: 20px;
+  flex: 1;
+}
+
+.send-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.offers-noti-col-inner {
+  max-height: 527px;
+  overflow: auto;
+}
+
+.chat-input {
+  background-color: #c0c0c0;
+  padding: 20px 30px 20px 40px;
+}
+
+.chat-wrap {
+  position: relative;
+  display: flex;
+  height: 527px;
+  overflow-y: auto;
+}
+
+.chat-wrap ul {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 20px 55px;
+  top: 0;
+}
+
+.chat-wrap ul li {
+  display: flex;
+  margin-bottom: 15px
+}
+
+.chat-wrap ul li .chat-text {
+  padding: 8px 12px;
+  border-radius: 5px;
+  position: relative;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.chat-wrap ul .sender {
+  justify-content: flex-end;
+}
+
+.chat-wrap ul .receiver {
+  justify-content: flex-start;
+}
+
+.chat-wrap ul .sender .chat-text::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 0px solid transparent;
+  border-left: 9px solid #00d32d;
+  border-bottom: 12px solid transparent;
+  position: absolute;
+  right: -5px;
+  top: 0;
+}
+
+.chat-wrap ul .receiver .chat-text::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 0px solid transparent;
+  border-left: 9px solid #fff;
+  border-bottom: 12px solid transparent;
+  position: absolute;
+  right: inherit;
+  top: 0;
+  transform: rotateY(180deg);
+  left: -5px;
+}
+
+.chat-wrap ul .sender .chat-text {
+  background-color: #00d32d;
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+  word-break: break-word;
+}
+
+.chat-wrap ul .receiver .chat-text {
+  background-color: #fff;
+  color: #707070;
+  box-shadow: 0px 2px 3px rgba(68, 69, 69, 0.30);
+  display: inline-block;
+  width: 100%;
+  word-break: break-word;
+}
+
+.chat-time {
+  color: #707070;
+  font-size: 14px;
+}
+
+.sender .chat-time {
+  text-align: right;
+  width: 100%;
+  display: inline-block;
+}
+
+.receiver .chat-time {
+  text-align: left;
+  width: 100%;
+  display: inline-block;
+}
+
+.sent-offer {
+  background-color: #707070;
+  border-radius: 10px;
+  text-align: center;
+  padding: 25px 15px 20px;
+  width: 160px;
+  margin: 0 auto;
+}
+
+.sent-offer.bg-white {
+  background-color: #ffffff;
+}
+
+.decline_offer,
+.send_offer {
+  cursor: pointer;
+}
+
+h2.swal2-title:after {
+  display: none;
+}
+
+.sent-offer-text p {
+  color: #fff;
+  line-height: 16px;
+}
+
+.bg-white .sent-offer-text p {
+  color: #707070;
+}
+
+.sent-offer-status-text {
+  color: #fff;
+}
+
+.chat-input-left {
+  display: flex;
+  flex: 10;
+}
+
+.chat-input-right {
+  flex: 1;
+}
+
+.sent-offer-wrap {
+  padding: 15px 25px !important;
+}
+
+.sent-offer-status {
+  border-top: 1px solid #fff;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.chat-input-left input {
+  background-color: transparent;
+  color: #fff;
+  padding: 0 15px;
+  width: 100%;
+}
+
+.chat-image {
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.chat-form {
+  width: 100%;
+}
+
+.chat-form label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.chat-input-left input[type="file"] {
+  display: none;
+}
+
+.chat-input-left input[type="text"] {
+  border: 0;
+  border-radius: 0;
+}
+
+/* Chat Management Upto Here */

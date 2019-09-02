@@ -1,0 +1,140 @@
+<div class="wrapper">
+	<section class="offers-notification innerpage">
+		<div class="container">
+			<div class="row">
+				<h2 class="msgs"> Inbox </h2>
+			</div>
+			<div class="row offers-noti-row">
+				<div class="col-md-6 offers-noti-col offers-noti-col-left">
+					<div class="offers-noti-col-inner ">
+						<h3>All Messages</h3>
+						<ul>
+							<li class="" *ngFor="let chatConv of chatConversion;index as current_index;">
+								<a href="javascript:void(0)" (click)="getChatHistory(chatConv.customerId,current_index,$event)" class="d-flex align-items-center friend_list">
+									<div class="noti-profile-pic">
+										<img src="{{userImgPath}}{{chatConv.profileImage}}" alt="profile-pic">
+
+									</div>
+									<div class="noti-profile-desc">
+										<div class="noti-profile-name d-flex align-items-center justify-content-between">
+											<h6 class="noti-name semi-bold">{{chatConv.customerName}}</h6><span class="noti-time">{{chatConv.conv_date}}</span>
+										</div>
+										<div class="noti-desc">
+											<p>{{ (chatConv.message.length>25)? (chatConv.message |
+												slice:0:25)+'..':(chatConv.message) }}</p>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-6 offers-noti-col offers-noti-col-right">
+					<div class="noti-chat-title">
+						<div class="noti-chat-desc d-flex justify-content-between">
+							<div class="noti-chat-desc-inner">
+								<h3>{{current_open_chat_data?.customerName}}</h3>
+							</div>
+							<div class="noti-profile-pic">
+								<img src="{{userImgPath}}{{current_open_chat_data?.profileImage}}" alt="profile-pic">
+							</div>
+						</div>
+						<div class="chat-wrap flex-column-reverse" #scrollMe>
+							<ul id="scroll_content">
+								<li *ngFor="let chatHist of chatHistory;index as current_index;" [ngClass]="chatHistory[current_index].senderId == user_data._id ? 'sender' : 'receiver'">
+									<div class="chating d-flex flex-column">
+										<span class="chat-text">{{chatHist.message}}</span>
+										<small class="chat-time">{{chatHist.createdAt | date:"dd-MMM-yy H:m:s"}}</small>
+									</div>
+								</li>
+							</ul>
+							<div class="chat-input d-flex justify-content-between">
+								<form [formGroup]="chatForm" (ngSubmit)="chatFormSubmit()" class="d-flex chat-form">
+									<div class="chat-input-left">
+										<input type="text" formControlName="message" name="" placeholder="Type Message" trim="blur">
+									</div>
+									<div class="chat-input-right">
+										<button [disabled]="chatForm.invalid" type="submit" name="" class="send-btn"><img src="assets/img/send-icon.svg"
+											 alt="send"></button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="col-md-6 offers-noti-col offers-noti-col-right">
+					<div class="noti-chat-title">
+						<div class="noti-chat-desc d-flex justify-content-between">
+							<div class="noti-chat-desc-inner">
+								<h3>{{current_open_chat_data.profile_name}}</h3>
+								<p>It is a long fact that a reader will be distracted.</p>
+							</div>
+							<div class="noti-profile-pic">
+								<img src="assets/images/profile-pic.png" alt="profile-pic">
+							</div>
+						</div>
+	
+						<div class="chat-wrap  flex-column-reverse">
+							<ul>
+								<li class="sender">
+									<div class="chating d-flex flex-column">
+										<span class="chat-text">Hi</span>
+										<small class="chat-time">03:23 PM</small>
+									</div>
+								</li>
+								<li class="receiver">
+									<div class="chating d-flex flex-column">
+										<span class="chat-text">Hello</span>
+										<small class="chat-time">03:23 PM</small>
+									</div>
+								</li>
+								<li class="receiver">
+									<div class="chating d-flex flex-column">
+										<span class="chat-text">How’s your work going?</span>
+										<small class="chat-time">03:23 PM</small>
+									</div>
+								</li>
+								<li class="sender">
+									<div class="chating d-flex flex-column">
+										<span class="chat-text">It’s almost good!	</span>
+										<small class="chat-time">03:23 PM</small>
+									</div>
+									
+								</li>
+								<li class="receiver ">
+									<div class="chating">
+									<span class=" chat-text  chating d-flex flex-column">
+										<div class="sent-offer">
+											<div class="sent-offer-text">
+												<p>Agent has sent you an offer :</p>
+											</div>
+											<div class="sent-offer-status"> 
+												<span class="sent-offer-status-text">OPEN</span>
+											</div>
+	
+										</div>
+	
+									</span>
+									<small class="chat-time">03:23 PM</small>
+									</div>
+								</li>
+	
+							</ul>
+							<div class="chat-input d-flex justify-content-between">
+								<div class="chat-input-left">
+									<a href="" class=""><img src="assets/images/plus-icon.svg" alt="plus"></a>
+									<input type="text" name="" placeholder="Type Message">
+								</div>
+								<div class="chat-input-right">
+									<button type="submit" name="" class="send-btn"><img src="assets/images/send-icon.svg" alt="send"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</section>
+</div>

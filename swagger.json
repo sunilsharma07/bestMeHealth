@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Best Me Health"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "192.168.2.162:3000",
+  "basePath": "/v1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "apiKey",
+      "description": "jwt authetication token",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/api/test": {
+      "get": {
+        "tags": [
+          "API"
+        ],
+        "security": [{
+          "auth": []
+        }],
+        "summary": "Test API",
+        "description": "",
+        "operationId": "test",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login API",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "",
+          "schema": {
+            "type": "string",
+            "required": [
+              "email",
+              "password"
+            ],
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              }
+            }
+          }
+        }],
+        "responses": {
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

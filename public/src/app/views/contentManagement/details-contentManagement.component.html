@@ -1,0 +1,66 @@
+<div class="card">
+  <form [formGroup]="contentDetailsForm" class="form-validate mb-lg" role="form" name="contentDetailsForm" novalidate=""
+    (submit)="updatecontentDetailsFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Category Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <fieldset class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Title</label>
+            <div class="col-sm-12">
+              <input placeholder="Title" type="text" name="title" formControlName="title" class="form-control"
+                readonly="true" />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="col-md-12">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Description</label>
+            <div class="col-sm-12">
+              <ckeditor *ngIf="action == 'view'" [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }"
+                formControlName="description" data="{{description}}" disabled="disabled"></ckeditor>
+              <ckeditor *ngIf="action == 'edit'" [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }"
+                formControlName="description" data="{{description}}"></ckeditor>
+              <div
+                *ngIf="(action == 'edit' && submitted && contentDetailsForm.controls.description.invalid) || contentDetailsForm.controls.description.touched">
+                <div *ngIf="contentDetailsForm.hasError('required','description')" class="err-msg">
+                  Please enter description.
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" (click)="enableEdit()">
+            <i class="fa fa-edit"> Edit</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark"
+            [routerLink]="['/contentManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="width: 120%;">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'edit'" type="submit" class="btn btn-pill btn-dark">
+            <i class="fa fa-edit"> Update</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'edit'" type="button" class="btn btn-pill btn-dark"
+            [routerLink]="['/contentManagement']">
+            <i class="fa fa-close"> Cancel</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

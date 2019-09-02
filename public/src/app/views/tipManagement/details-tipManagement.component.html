@@ -1,0 +1,133 @@
+<div class="card">
+  <form [formGroup]="detailsTipForm" class="form-validate mb-lg" role="form" name="detailsTipForm" novalidate=""
+    (submit)="updateFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-bullhorn"></i>Tip Details
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Tip Type</label>
+              <div class="col-sm-12">
+                <!-- <ng-multiselect-dropdown *ngIf="action == 'view'" [placeholder]="'Select Tip Type'"
+                  [data]="tipTypesList" disabled="true" [settings]="tipTypesDropdownSettings" formControlName="tipType">
+                </ng-multiselect-dropdown> -->
+                <input *ngIf="action == 'view'" placeholder="Tip Type" type="text" name="tipType"
+                  formControlName="tipType" class="form-control" readonly="true" />
+                <ng-multiselect-dropdown *ngIf="action == 'edit'" [placeholder]="'Select Tip Type'"
+                  [data]="tipTypesList" [settings]="tipTypesDropdownSettings" (onSelect)="onTipTypeSelect($event)"
+                  formControlName="tipType">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="(action == 'edit' && submitted && detailsTipForm.controls.tipType.invalid) || detailsTipForm.controls.tipType.touched">
+                  <div *ngIf="detailsTipForm.hasError('required','tipType')" class="err-msg">
+                    Please select tip type.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Title" type="text" name="title" formControlName="title"
+                  class="form-control" readonly="true" />
+                <input *ngIf="action == 'edit'" placeholder="Title" type="text" name="title" formControlName="title"
+                  class="form-control" minlength="2" maxlength="50" />
+                <div
+                  *ngIf="(action == 'edit' && submitted && detailsTipForm.controls.title.invalid) || detailsTipForm.controls.title.touched">
+                  <div *ngIf="detailsTipForm.hasError('required','title')" class="err-msg">
+                    Please enter title.
+                  </div>
+                  <div
+                    *ngIf="!detailsTipForm.hasError('required','title') && detailsTipForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Please enter valid title.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Date</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" type="text" formControlName="date" [minDate]="minDate"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Datepicker" class="form-control"
+                  bsDatepicker disabled />
+                <input *ngIf="action == 'edit'" type="text" formControlName="date" [minDate]="minDate"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Datepicker" class="form-control"
+                  bsDatepicker (bsValueChange)="onDateValueChange($event)" />
+                <span> From:-
+                  <b>{{ detailsTipForm.value.date | date:'mediumDate'}}</b>
+                </span>&nbsp;
+                <span> To:-
+                  <b>{{ toDate | date:'mediumDate'}}</b>
+                </span>
+                <div
+                  *ngIf="(submitted && detailsTipForm.controls.date.invalid) || detailsTipForm.controls.date.touched">
+                  <div *ngIf="detailsTipForm.hasError('required','date')" class="err-msg">
+                    Please enter date.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Description</label>
+              <div class="col-sm-12">
+                <textarea *ngIf="action == 'view'" placeholder="Description" type="text" name="description"
+                  formControlName="description" readonly class="form-control"></textarea>
+                <textarea *ngIf="action == 'edit'" placeholder="Description" type="text" name="description"
+                  formControlName="description" class="form-control" minlength="2" maxlength="500"></textarea>
+                <div
+                  *ngIf="(submitted && detailsTipForm.controls.description.invalid) || detailsTipForm.controls.description.touched">
+                  <div *ngIf="detailsTipForm.hasError('required','description')" class="err-msg">
+                    Please enter description.
+                  </div>
+                  <div
+                    *ngIf="!detailsTipForm.hasError('required','description') && detailsTipForm.hasError('pattern','description')"
+                    class="err-msg">
+                    Please enter valid description.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark" (click)="enableEdit()">
+            <i class="fa fa-edit"> Edit</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'view'" type="button" class="btn btn-pill btn-dark"
+            [routerLink]="['/tipManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+      <div class="row" style="width: 120%;">
+        <div class="col-sm-1">
+          <button *ngIf="action == 'edit'" type="submit" class="btn btn-pill btn-dark">
+            <i class="fa fa-edit"> Update</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button *ngIf="action == 'edit'" type="button" class="btn btn-pill btn-dark"
+            [routerLink]="['/tipManagement']">
+            <i class="fa fa-close"> Cancel</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

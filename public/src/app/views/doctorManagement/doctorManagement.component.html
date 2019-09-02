@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <span><i class="fa fa-user-md"></i> Doctor Listing</span>
+    <button style="float: right;" [routerLink]="['/doctorManagement/addDoctor']" class="btn btn-pill btn-success"><i
+        class="fa fa-plus"></i>
+      Add Doctor</button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="doctors?.length != 0">
+          <tr *ngFor="let doctor of doctors">
+            <td>{{ doctor.firstName }}</td>
+            <td>{{ doctor.lastName }}</td>
+            <td>{{ doctor.email }}</td>
+            <td *ngIf="doctor.userType == 'superDoctor'">Super Doctor</td>
+            <td *ngIf="doctor.userType == 'subDoctor'">Sub Doctor</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/doctorManagement/doctorDetails', doctor._id]"><i
+                  class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <button *ngIf="doctor.isActive == false" (click)="changedDoctorstatus(doctor._id, 'active')" class="btn btn-success btn-pill"><i
+                  class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="doctor.isActive == true" (click)="changedDoctorstatus(doctor._id, 'inactive')" class="btn btn-warning btn-pill"><i
+                  class="fa fa-ban">
+                  In-Active</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="doctors?.length == 0">
+          <tr>
+            <td colspan="5" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

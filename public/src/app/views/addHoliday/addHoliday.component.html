@@ -1,0 +1,62 @@
+<div class="card">
+  <form [formGroup]="addHolidayForm" class="form-validate mb-lg" role="form" name="addHolidayForm" novalidate=""
+    (submit)="addHolidayFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-clock-o"></i>Add Holiday
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <div class="col-xs-12 col-12 col-md-4 form-group">
+            <input type="text" formControlName="holidayDate" [minDate]="minDate" [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }"
+              placeholder="Datepicker" class="form-control" bsDatepicker>
+            <div *ngIf="(submitted && addHolidayForm.controls.holidayDate.invalid) || addHolidayForm.controls.holidayDate.touched">
+              <div *ngIf="addHolidayForm.hasError('required','holidayDate')" class="err-msg">
+                Please enter holiday date.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="
+              card-footer">
+      <div class="row">
+        <div class="col-sm-1">
+          <button class="btn btn-pill btn-dark" type="submit">
+            <i class="fa fa-check"> Save</i>
+          </button>
+        </div>
+        <div class="col-sm-1 nopadding">
+          <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+            <i class="fa fa-backward"> Back</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-clock-o"></i>Holiday Listing
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Holiday Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hd of holidayDate?.holidayDate; let i = index">
+            <td>{{ hd | date: "yyyy-MM-dd"}}</td>
+            <td><button title="Delete" (click)="deleteHoliday(hd,i)" class="btn btn-danger btn-pill"><i class="fa fa-trash"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

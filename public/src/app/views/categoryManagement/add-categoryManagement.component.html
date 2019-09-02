@@ -1,0 +1,66 @@
+<div class="card">
+  <form [formGroup]="addForm" class="form-validate mb-lg" role="form" name="addForm" novalidate="" (submit)="addFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-user"></i>Add Category
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <fieldset class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Category Name</label>
+            <div class="col-sm-12">
+              <input placeholder="Name" type="text" name="name" formControlName="name" class="form-control" minlength="2"
+                maxlength="50" />
+              <div *ngIf="(submitted && addForm.controls.name.invalid) || addForm.controls.name.touched">
+                <div *ngIf="addForm.hasError('required','name')" class="err-msg">
+                  Please enter category name.
+                </div>
+                <div *ngIf="!addForm.hasError('required','name') && addForm.hasError('pattern','name')" class="err-msg">
+                  Category name should contain only characters.
+                </div>
+                <div *ngIf="!addForm.hasError('pattern','name') && !addForm.hasError('required','name') && addForm.hasError('minlength','name')"
+                  class="err-msg">
+                  Category name should contain at least 2 characters.
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Category Type</label>
+            <div class="col-sm-12">
+              <ng-multiselect-dropdown [placeholder]="'Select Category Type'" [data]="categoryTypesList" [settings]="categoryTypesDropdownSettings"
+                formControlName="catType">
+              </ng-multiselect-dropdown>
+              <div *ngIf="(submitted && addForm.controls.catType.invalid) || addForm.controls.catType.touched">
+                <div *ngIf="addForm.hasError('required','catType')" class="err-msg">
+                  Please select category type.
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label">Category Image</label>
+            <div class="col-sm-12">
+              <input type="file" (change)="onFileChange($event)" name="media" formControlName="media" class="form-control" />
+              <div *ngIf="isFileExtensionError == true" class="err-msg">
+                Please upload valid image.
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/categoryManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

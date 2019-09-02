@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-users"></i>Note Listing
+    <button type="button" [routerLink]="['/notesManagement', userId, 'getMyNotes']" class="btn btn-pill btn-dark"
+      style="float:right"><i class="fa fa-pencil-square"> Get My
+        Notes</i></button>
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Notes</th>
+            <th>Added By</th>
+            <th>Added User Type</th>
+            <th *ngIf="isGetSelfNote">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="notes?.length != 0">
+          <tr *ngFor="let note of notes">
+            <td>{{ note.notes }}</td>
+            <td>{{ note.whoAdded }}</td>
+            <td>{{ note.adminRole | lowercase }}</td>
+            <td *ngIf="isGetSelfNote">
+              <button class="btn btn-pill btn-dark" (click)="editNoteBtn(template, note.notes, note._id)"><i
+                  class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <button class="btn btn-pill btn-danger" (click)="deleteNotes(note._id)"><i class="fa fa-close">
+                  Delete</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="notes?.length == 0">
+          <tr>
+            <td *ngIf="isGetSelfNote == false" colspan="3" class="no-data-available">No data!</td>
+            <td *ngIf="isGetSelfNote" colspan="4" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <form [formGroup]="updateNoteForm" class="form-validate mb-lg" role="form" name="updateNoteForm"
+    (submit)="updateNoteFormSubmit()" novalidate="">
+    <div class="modal-header">
+      <h4 class=" modal-title pull-left">Update Note</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <fieldset class="col-md-12">
+        <div class="form-group">
+          <label class="col-sm-12 control-label">Notes</label>
+          <div class="col-sm-12">
+            <textarea placeholder="Notes" type="text" name="notes" formControlName="notes"
+              class="form-control"></textarea>
+            <div *ngIf="
+                  (submitted && updateNoteForm.controls.notes.invalid) ||
+                  updateNoteForm.controls.notes.touched
+                ">
+              <div *ngIf="updateNoteForm.hasError('required', 'notes')" class="err-msg">
+                Please enter your notes.
+              </div>
+              <div *ngIf="
+                    !updateNoteForm.hasError('required', 'notes') &&
+                    updateNoteForm.hasError('minlength', 'notes')
+                  " class="err-msg">
+                Note should contain at least 2 characters.
+              </div>
+              <div *ngIf="
+                    !updateNoteForm.hasError('required', 'notes') &&
+                    updateNoteForm.hasError('pattern', 'notes')
+                  " class="err-msg">
+                  Please enter valid notes.
+              </div>
+              <div *ngIf="
+                    !updateNoteForm.hasError('required', 'notes') &&
+                    !updateNoteForm.hasError('pattern', 'notes') &&
+                    updateNoteForm.hasError('minlength', 'notes')" class="err-msg">
+                Note should contain at least 2 characters.
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-pill btn-dark">
+        <i class=" fa fa-edit"> Update</i>
+      </button>
+      <button type="button" class="btn btn-pill btn-dark" (click)="modalRef.hide()">
+        <i class="fa fa-close"> Cancel</i>
+      </button>
+    </div>
+  </form>
+</ng-template>

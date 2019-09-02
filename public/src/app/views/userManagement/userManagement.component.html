@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-users"></i>App User Listing
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th style="width: 25%">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="users?.length != 0">
+          <tr *ngFor="let user of users">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button class="btn btn-dark btn-pill" [routerLink]="['/userManagement/userDetails', user._id]"><i class="fa fa-eye">
+                  View</i></button>&nbsp;
+              <!-- <button class="btn btn-dark btn-pill" [routerLink]="['/reportManagement/', user._id]"><i class="fa fa-plus-square">
+                  Test Report</i></button>&nbsp; -->
+              <button *ngIf="user.isActive == false" (click)="changedUserStatus(user._id, 'active')" class="btn btn-success btn-pill"><i
+                  class="fa fa-check">
+                  Active</i></button>
+              <button *ngIf="user.isActive == true" (click)="changedUserStatus(user._id, 'inactive')" class="btn btn-warning btn-pill"><i
+                  class="fa fa-ban">
+                  In-Active</i></button>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="users?.length == 0">
+          <tr>
+            <td colspan="4" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

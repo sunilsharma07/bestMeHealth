@@ -1,0 +1,295 @@
+<div class="card">
+  <form [formGroup]="detailsUserForm" class="form-validate mb-lg" role="form" name="detailsUserForm" novalidate="">
+    <div class="card-header">
+      <i class="fa fa-user"></i>App User Details
+      <div class="gen-mel-pln-btn">
+        <button (click)="navigateToMealPlan()" class="btn btn-pill btn-dark" style="float:right">
+          <i class="fa fa-plus"> Generate Meal Plan</i>
+        </button>
+        <button (click)="addNotesBtn(template)" class="btn btn-pill btn-dark" style="float:right; margin-right: 10px;">
+          <i class="fa fa-plus"> Add Notes</i>
+        </button>
+        <button [routerLink]="['/notesManagement', userId]" class="btn btn-pill btn-dark"
+          style="float:right; margin-right: 10px;">
+          <i class="fa fa-pencil-square"> Get Notes</i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-lg-12">
+            <div class="form-group customerProPic">
+              <div class="col-sm-12">
+                <img *ngIf="action == 'view'" (error)="onImageFoundError($event)" src="{{ profilePic }}"
+                  class="customImg" name="profilePic" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">First Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="First Name" type="text" name="firstName"
+                  formControlName="firstName" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Last Name</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Last Name" type="text" name="lastName"
+                  formControlName="lastName" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Email</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Email" type="text" name="email" formControlName="email"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Phone Number</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Phone Number" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Address</label>
+              <div class="col-sm-12">
+                <textarea *ngIf="action == 'view'" placeholder="Address" type="text" name="address"
+                  formControlName="address" class="form-control" readonly="true"></textarea>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Gender</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Gender" type="text" name="gender" formControlName="gender"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Height</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Height" type="text" name="height" formControlName="height"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Weight</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Weight" type="text" name="weight" formControlName="weight"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">RMR Value</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="RMR Value" type="text" name="rmr" formControlName="rmr"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Dietary Requirement</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Dietary Requirement" type="text" name="dietaryRequirement"
+                  formControlName="dietaryRequirement" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Date Of Birth</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Date Of Birth" type="text" name="dateOfBirth"
+                  formControlName="dateOfBirth" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Physical Disabilitiies</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Physical Disabilitiies" type="text"
+                  name="physicalDisabilitiies" formControlName="physicalDisabilitiies" class="form-control"
+                  readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Allergies</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Allergies" type="text" name="allergies"
+                  formControlName="allergies" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Unfavorite Food</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Unfavorite Food" type="text" name="unfavoriteFood"
+                  formControlName="unfavoriteFood" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Favorite Food</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Favorite Food" type="text" name="favoriteFood"
+                  formControlName="favoriteFood" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Daily Eat Food</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Daily Eat Food" type="text" name="dailyEatFood"
+                  formControlName="dailyEatFood" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Goal</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Goal" type="text" name="goal" formControlName="goal"
+                  class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Activity Level</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Activity Level" type="text" name="activityLevel"
+                  formControlName="activityLevel" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Is Waiting For Top Tier</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" value="true" type="radio" name="isWaitingForTopTier"
+                  formControlName="isWaitingForTopTier" disabled />
+                Yes
+                <input *ngIf="action == 'view'" value="false" type="radio" name="isWaitingForTopTier"
+                  formControlName="isWaitingForTopTier" disabled />
+                No
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Is Referred</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" value="true" type="radio" name="isReferred" formControlName="isReferred"
+                  disabled />
+                Yes
+                <input *ngIf="action == 'view'" value="false" type="radio" name="isReferred"
+                  formControlName="isReferred" disabled />
+                No
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Current Plan</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Current Plan" type="text" name="currentPlan"
+                  formControlName="currentPlan" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Profile Type</label>
+              <div class="col-sm-12">
+                <input *ngIf="action == 'view'" placeholder="Profile Type" type="text" name="profileType"
+                  formControlName="profileType" class="form-control" readonly="true" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/userManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #template>
+  <form [formGroup]="addNoteForm" class="form-validate mb-lg" role="form" name="addNoteForm"
+    (submit)="addNoteFormSubmit()" novalidate="">
+    <div class="modal-header">
+      <h4 class=" modal-title pull-left">Add Note</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <fieldset class="col-md-12">
+        <div class="form-group">
+          <label class="col-sm-12 control-label">Notes</label>
+          <div class="col-sm-12">
+            <textarea placeholder="Notes" type="text" name="notes" formControlName="notes"
+              class="form-control"></textarea>
+            <div *ngIf="
+                (submitted && addNoteForm.controls.notes.invalid) ||
+                addNoteForm.controls.notes.touched
+              ">
+              <div *ngIf="addNoteForm.hasError('required', 'notes')" class="err-msg">
+                Please enter your notes.
+              </div>
+              <div *ngIf="!addNoteForm.hasError('required', 'notes') && addNoteForm.hasError('pattern', 'notes')"
+                class="err-msg">
+                Please enter valid notes.
+              </div>
+              <div *ngIf="
+                  !addNoteForm.hasError('required', 'notes') &&
+                  !addNoteForm.hasError('pattern', 'notes') &&
+                  addNoteForm.hasError('minlength', 'notes')
+                " class="err-msg">
+                Note should contain at least 2 characters.
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-pill btn-dark">
+        <i class=" fa fa-check"> Save</i>
+      </button>
+      <button type="button" class="btn btn-pill btn-dark" (click)="modalRef.hide()">
+        <i class="fa fa-close"> Cancel</i>
+      </button>
+    </div>
+  </form>
+</ng-template>

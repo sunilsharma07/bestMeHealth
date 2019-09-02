@@ -1,0 +1,96 @@
+<div class="card">
+  <form [formGroup]="addTipForm" class="form-validate mb-lg" role="form" name="addTipForm" novalidate=""
+    (submit)="addTipFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-bullhorn"></i>Add New Tip
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Tip Type</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Tip Type'" [data]="tipTypesList"
+                  [settings]="tipTypesDropdownSettings" (onSelect)="onTipTypeSelect($event)" formControlName="tipType">
+                </ng-multiselect-dropdown>
+                <div *ngIf="(submitted && addTipForm.controls.tipType.invalid) || addTipForm.controls.tipType.touched">
+                  <div *ngIf="addTipForm.hasError('required','tipType')" class="err-msg">
+                    Please select tip type.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input placeholder="Title" type="text" name="title" formControlName="title" class="form-control"
+                  minlength="2" maxlength="50" />
+                <div *ngIf="(submitted && addTipForm.controls.title.invalid) || addTipForm.controls.title.touched">
+                  <div *ngIf="addTipForm.hasError('required','title')" class="err-msg">
+                    Please enter title.
+                  </div>
+                  <div *ngIf="!addTipForm.hasError('required','title') && addTipForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Please enter valid title.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Date</label>
+              <div class="col-sm-12">
+                <input type="text" formControlName="date" [minDate]="minDate"
+                  [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" placeholder="Datepicker" class="form-control"
+                  bsDatepicker (bsValueChange)="onDateValueChange($event)">
+                <span> From:-
+                  <b>{{addTipForm.value.date | date:'mediumDate'}}</b>
+                </span>&nbsp;
+                <span> To:-
+                  <b>{{toDate | date:'mediumDate'}}</b>
+                </span>
+                <div *ngIf="(submitted && addTipForm.controls.date.invalid) || addTipForm.controls.date.touched">
+                  <div *ngIf="addTipForm.hasError('required','date')" class="err-msg">
+                    Please enter date.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Description</label>
+              <div class="col-sm-12">
+                <textarea placeholder="Description" type="text" name="description" formControlName="description"
+                  class="form-control" minlength="2" maxlength="500"></textarea>
+                <div
+                  *ngIf="(submitted && addTipForm.controls.description.invalid) || addTipForm.controls.description.touched">
+                  <div *ngIf="addTipForm.hasError('required','description')" class="err-msg">
+                    Please enter description.
+                  </div>
+                  <div
+                    *ngIf="!addTipForm.hasError('required','description') && addTipForm.hasError('pattern','description')"
+                    class="err-msg">
+                    Please enter valid description.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/tipManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>

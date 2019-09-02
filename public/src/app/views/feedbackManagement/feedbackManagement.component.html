@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-header">
+    <i class="fa fa-users"></i>Feedback Listing
+  </div>
+  <div class="card-body">
+    <div class="panel panel-default">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Reaction</th>
+            <th>Created At</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="feedback?.length != 0">
+          <tr *ngFor="let fb of feedback">
+            <td>{{fb.userName}}</td>
+            <td>{{fb.type}}</td>
+            <td>{{fb.reaction}}</td>
+            <td>{{fb.createdAt | date:'dd-MM-yyyy'}}</td>
+            <td>{{fb.message}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="feedback?.length == 0">
+          <tr>
+            <td colspan="5" class="no-data-available">No data!</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

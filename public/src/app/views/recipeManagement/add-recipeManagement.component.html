@@ -1,0 +1,274 @@
+<div class="card">
+  <form [formGroup]="addRecipeForm" class="form-validate mb-lg" role="form" name="addRecipeForm" novalidate=""
+    (submit)="addRecipeFormSubmit()">
+    <div class="card-header">
+      <i class="fa fa-cutlery"></i>Add New Recipe
+    </div>
+    <div class="card-body">
+      <div class="panel panel-default">
+        <div class="row">
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Title</label>
+              <div class="col-sm-12">
+                <input placeholder="Title" type="text" name="title" formControlName="title" minlength="2"
+                  maxlength="100" class="form-control" />
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.title.invalid) || addRecipeForm.controls.title.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','title')" class="err-msg">
+                    Please enter title.
+                  </div>
+                  <div *ngIf="!addRecipeForm.hasError('required','title') && addRecipeForm.hasError('pattern','title')"
+                    class="err-msg">
+                    Please enter valid title.
+                  </div>
+                  <div
+                    *ngIf="!addRecipeForm.hasError('pattern','title') && !addRecipeForm.hasError('required','title') && addRecipeForm.hasError('minlength','title')"
+                    class="err-msg">
+                    Title field should contain at least 2 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Select Food Category</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Food Category'" [data]="allFoodCategory"
+                  [settings]="foodCategoryDropdownSettings" formControlName="foodCategory">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.foodCategory.invalid) || addRecipeForm.controls.foodCategory.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','foodCategory')" class="err-msg">
+                    Please enter food category.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Food Type</label>
+              <div class="col-sm-12">
+                <ng-multiselect-dropdown [placeholder]="'Select Food Type'" [data]="foodType"
+                  [settings]="foodTypeDropdownSettings" formControlName="foodType">
+                </ng-multiselect-dropdown>
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.foodType.invalid) || addRecipeForm.controls.foodType.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','foodType')" class="err-msg">
+                    Please enter food type.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Preparation Time</label>
+              <div class="col-sm-12">
+                <input placeholder="Preparation Time ( In Minutes )" type="text" name="prepTime"
+                  formControlName="prepTime" class="form-control" maxlength="5" />
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.prepTime.invalid) || addRecipeForm.controls.prepTime.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','prepTime')" class="err-msg">
+                    Please enter preparation time.
+                  </div>
+                  <div
+                    *ngIf="!addRecipeForm.hasError('required','prepTime') && addRecipeForm.hasError('pattern','prepTime')"
+                    class="err-msg">
+                    Preparation time field should be accept only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">No. Of People</label>
+              <div class="col-sm-12">
+                <input placeholder="No. Of People" type="text" maxlength="5" name="serves" formControlName="serves"
+                  class="form-control" />
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.serves.invalid) || addRecipeForm.controls.serves.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','serves')" class="err-msg">
+                    Please enter no of people.
+                  </div>
+                  <div
+                    *ngIf="!addRecipeForm.hasError('required','serves') && addRecipeForm.hasError('pattern','serves')"
+                    class="err-msg">
+                    No of people field should be accept only digits.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Image</label>
+              <div class="col-sm-12">
+                <input type="file" (change)="onFileChange($event)" name="media" formControlName="media"
+                  class="form-control" />
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.media.invalid) || addRecipeForm.controls.media.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','media')" class="err-msg">
+                    Please upload recipe media.
+                  </div>
+                </div>
+                <div *ngIf="isMediaExtensionError == true" class="err-msg">
+                  Please upload valid image.
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-6">
+            <div class="form-group row" style="margin-left:0">
+              <label class="col-sm-12 control-label">Is recipe for sale?</label>
+              <div class="col-sm-12">
+                <label class="cusRadioBtnLbl rmvLblClass">Yes
+                  <input type="radio" formControlName="recipeForSale" value="yes">
+                  <span class="cusRadioBtnSpan"></span>
+                </label>
+                <label class="cusRadioBtnLbl rmvLblClass">No
+                  <input type="radio" formControlName="recipeForSale" value="no">
+                  <span class="cusRadioBtnSpan"></span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset *ngIf="addRecipeForm.value.recipeForSale == 'yes'" class="col-md-6">
+            <div class="form-group row" style="margin-left:0">
+              <label class="col-sm-12 control-label">Recipe Price</label>
+              <div class="col-sm-12">
+                <input placeholder="Price" type="text" name="recipePrice" formControlName="recipePrice" maxlength="10"
+                  class="form-control" />
+                <div *ngIf="(submitted)">
+                  <div *ngIf="addRecipeForm.value.recipeForSale == 'yes' && addRecipeForm.value.recipePrice == ''"
+                    class="err-msg">
+                    Please enter price.
+                  </div>
+                  <div
+                    *ngIf="!addRecipeForm.hasError('required','recipePrice') && addRecipeForm.hasError('pattern','recipePrice')"
+                    class="err-msg">
+                    Recipe price filed should be accept only digits and non zero.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Ingredients</label>
+            </div>
+          </fieldset>
+          <div class="col-sm-12">
+            <div class="form-grp-wrap" formArrayName="ingredients"
+              *ngFor="let ingredientsControl of ingredientsData.controls; let i = index;">
+              <ng-container [formGroupName]="i">
+                <fieldset class="col-md-3">
+                  <div class="form-group custom-form-grp">
+                    <label class="col-sm-12 control-label">Title</label>
+                    <div class="col-sm-12">
+                      <ng-multiselect-dropdown [placeholder]="'Title'" [data]="allIngredients"
+                        [settings]="ingredientsDropdownSettings" formControlName="title">
+                      </ng-multiselect-dropdown>
+                      <div
+                        *ngIf="((submitted || partialSubmmit) && addRecipeForm && addRecipeForm.controls.ingredients.controls[i].controls.title.invalid)">
+                        <div *ngIf="addRecipeForm.controls.ingredients.controls[i].hasError('required','title')"
+                          class="err-msg">
+                          Please enter title.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="col-md-3">
+                  <div class="form-group custom-form-grp">
+                    <label class="col-sm-12 control-label">Quantity</label>
+                    <div class="col-sm-12">
+                      <input type="text" name="{{ingredientsControl}}" class="form-control" placeholder="Quantity"
+                        formControlName="qty" maxlength="5">
+                      <div
+                        *ngIf="((submitted || partialSubmmit) && addRecipeForm && addRecipeForm.controls.ingredients.controls[i].controls.qty.invalid)">
+                        <div *ngIf="addRecipeForm.controls.ingredients.controls[i].hasError('required','qty')"
+                          class="err-msg">
+                          Please enter quantity.
+                        </div>
+                        <div
+                          *ngIf="!addRecipeForm.controls.ingredients.controls[i].hasError('required','qty') && addRecipeForm.controls.ingredients.controls[i].hasError('pattern','qty')"
+                          class="err-msg">
+                          Quantity field should be accept only digits.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="col-md-3">
+                  <div class="form-group custom-form-grp">
+                    <label class="col-sm-12 control-label">Measure</label>
+                    <div class="col-sm-12">
+                      <input type="text" name="{{ingredientsControl}}" class="form-control" placeholder="Measure"
+                        formControlName="measure">
+                      <div
+                        *ngIf="((submitted || partialSubmmit) && addRecipeForm && addRecipeForm.controls.ingredients.controls[i].controls.measure.invalid)">
+                        <div *ngIf="addRecipeForm.controls.ingredients.controls[i].hasError('required','measure')"
+                          class="err-msg">
+                          Please enter measure.
+                        </div>
+                        <div
+                          *ngIf="!addRecipeForm.controls.ingredients.controls[i].hasError('required','measure') && addRecipeForm.controls.ingredients.controls[i].hasError('pattern','measure')"
+                          class="err-msg">
+                          Please enter valid measure.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="col-md-3">
+                  <label class="col-sm-12 control-label">&nbsp;</label>
+                  <div *ngIf="i > 0" class="addBtnCss">
+                    <button type="button" class="btn btn-danger btn-pill" (click)="removeNewIngredients(i)">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </div>
+                  <div class="rmvBtnCss" *ngIf="i == (ingredientsData.controls.length -1)">
+                    <button class="btn btn-success btn-pill" type="button" (click)="addNewIngredients(i)"><i
+                        class="fa fa-plus"></i></button>
+                  </div>
+                </fieldset>
+              </ng-container>
+            </div>
+          </div>
+          <fieldset class="col-md-12">
+            <div class="form-group">
+              <label class="col-sm-12 control-label">Directions</label>
+              <div class="col-sm-12">
+                <ckeditor [editor]="Editor" [config]="{ removePlugins: [ 'ImageUpload' ] }"
+                  formControlName="directions"></ckeditor>
+                <div
+                  *ngIf="(submitted && addRecipeForm.controls.directions.invalid) || addRecipeForm.controls.directions.touched">
+                  <div *ngIf="addRecipeForm.hasError('required','directions')" class="err-msg">
+                    Please enter directions.
+                  </div>
+                  <!-- <div
+                    *ngIf="!addRecipeForm.hasError('required','directions') && addRecipeForm.hasError('pattern','directions')"
+                    class="err-msg">
+                    Please enter valid directions.
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-pill btn-dark" type="submit">
+        <i class="fa fa-check"> Save</i>
+      </button>&nbsp;
+      <button type="button" class="btn btn-pill btn-dark" [routerLink]="['/recipeManagement']">
+        <i class="fa fa-backward"> Back</i>
+      </button>
+    </div>
+  </form>
+</div>
