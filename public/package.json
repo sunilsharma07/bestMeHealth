@@ -53,7 +53,7 @@
     "datatables.net-dt": "^1.10.19",
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "moment": "^2.23.0",
     "mutationobserver-shim": "^0.3.3",
     "ng-multiselect-dropdown": "^0.2.3",
