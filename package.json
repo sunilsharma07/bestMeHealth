@@ -33,7 +33,7 @@
     "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
     "mysql": "^2.15.0",
-    "nodemailer": "^4.6.7",
+    "nodemailer": "^6.4.16",
     "nodemailer-smtp-transport": "^2.7.2",
     "sails-disk": "^1.1.0",
     "sails-hook-grunt": "^3.0.2",
